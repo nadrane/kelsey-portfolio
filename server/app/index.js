@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
-const env = require('../env')
+const env = require('../../env')
 
 app.use(morgan('dev'));
 

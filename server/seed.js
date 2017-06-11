@@ -1,9 +1,8 @@
-const fs = require("fs");
 const { promisify } = require("util");
-const readdir = promisify(fs.readdir);
+const readdir = promisify(require('fs').readdir)
 const path = require('path')
 
-const env = require("./env");
+const env = require("../env");
 const db = require("./db/db");
 const models = require("./db/models");
 const Image = models.Image;
@@ -18,10 +17,8 @@ function seedTable(tableName, cb) {
 }
 
 function createImages() {
-  console.log('env', env)
-  return readdir(path.join(env.PUBLIC_DIR, 'images')) 
+  return readdir(env.IMAGES) 
     .then(images => {
-      console.log('images', images)
       return Promise.all(images.map(imagePath => {
         return Image.create({
           path: imagePath

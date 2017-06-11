@@ -2,7 +2,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const Sequelize = require('sequelize');
-const DATABASE_URI = require(path.join(__dirname, '../env')).DATABASE_URI;
+const DATABASE_URI = require(path.join(__dirname, '../../env')).DATABASE_URI;
 
 console.log(chalk.yellow('Opening connection to PostgreSQL'));
 
