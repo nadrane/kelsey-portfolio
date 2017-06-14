@@ -1,12 +1,9 @@
 'use strict';
 
-const db = require('../db');
-const DataTypes = db.Sequelize;
-
-module.exports = db.define('tag', {
+module.exports = db => db.define('tag', {
 
   name: {
-    type: DataTypes.STRING,
+    type: db.Sequelize.STRING,
     allowNull: false,
   },
 

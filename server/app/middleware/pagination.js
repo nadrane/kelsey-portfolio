@@ -3,11 +3,11 @@ const router = module.exports = express.Router();
 
 router.use(function(req, res, next) {
   if (req.query.limit) {
-    if (req.query.limit > 10) {
-      req.query.limit = 10;
+    if (req.query.limit > 15) {
+      req.query.limit = 15;
     }
   } else {
-    req.query.limit = 50;
+    req.query.limit = 15;
   }
 
   req.pagination = {

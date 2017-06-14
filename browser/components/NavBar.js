@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "React";
+import React from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 

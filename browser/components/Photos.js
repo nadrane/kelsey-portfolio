@@ -1,4 +1,6 @@
-import React from "React";
+"use strict";
+
+import React from "react";
 import { Card } from "material-ui/Card";
 import { GridList, GridTile } from "material-ui/GridList";
 import Subheader from 'material-ui/Subheader';
@@ -9,7 +11,7 @@ const cardStyle = {
 
 function Photos({ photos }) {
   return (
-    <GridList cellHeight={350} cols={4}>
+    <GridList cellHeight={250} cols={3} width={"50%"}>
       <Subheader>December</Subheader>
       {photos.map(photo => (
         <GridTile key={photo.id}>
