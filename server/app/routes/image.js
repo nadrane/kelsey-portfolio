@@ -1,19 +1,19 @@
 "use strict";
 
 const express = require("express");
-const router = (module.exports = new express.Router());
+const router = module.exports = new express.Router();
 const { Image } = require("../../db/models");
 
 router.get("/", function(req, res, next) {
   req.query.tag
-    ? getImagesWithTagName(req)
+    ? Image.getImagesWithTagName(req)
     : getAllImages(req).then(images => res.json(images)).catch(next);
 });
 
 router.get("/:imageId", function(req, res, next) {
   Image.findById(req.params.imageId)
     .then(image => {
-      res.json(image)
+      res.json(image);
     })
     .catch(next);
 });
@@ -40,6 +40,6 @@ router.delete("/:imageId", function(req, res, next) {
 
 function getAllImages(req) {
   return Image.findAll(
-    Object.assign({ include: [ImageVersion] }, req.pagination)
+    req.pagination
   );
 }

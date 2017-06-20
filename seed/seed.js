@@ -17,7 +17,8 @@ function seedTable(tableName, cb) {
 }
 
 function createImages() {
-  return fs.readdirAsync(env.SEED_IMAGES) 
+  return fs.readdirAsync(env.SEED_IMAGES)
+    .then(images => images.filter(path => !path.startsWith('.')))
     .then(images => {
       return Promise.map(images, imagePath => {
         return fs.readFileAsync(path.join(env.SEED_IMAGES, imagePath))
@@ -25,13 +26,13 @@ function createImages() {
             return Image.create({
               path: imagePath,
               data: imageData.toString('base64')
-            })
-            .then(image => {
-              console.log(`finished seeding ${image.path}`)
-            })
+            });
+          })
+          .then(image => {
+            console.log(`finished seeding ${image.path}`)
           })
           .catch(err => {
-            console.log(`Failed to seed ${image.path}`)
+            console.log('Failed to seed file');
             console.error(err)
           })
       });
