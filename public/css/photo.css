@@ -1,0 +1,40 @@
+.gallery > .photo {
+  display: block;
+  max-width: 100%;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: .125rem;
+  grid-auto-flow: row dense;
+  align-items: start;
+}
+  /*grid-auto-rows: minmax(100px, auto);*/
+  /*max-width: 98vw;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: .5rem;
+}
+
+ /*display: grid;
+  ;
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);*/
+/*
+@media screen and (min-width: 620px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .gallery {
+    column-count: 3;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .gallery {
+    column-count: 4;
+  }
+}*/
