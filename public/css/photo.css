@@ -1,14 +1,16 @@
 .gallery > .photo {
+  break-inside: avoid;
+}
+
+.gallery > .photo > img {
   display: block;
   max-width: 100%;
+  padding: .125rem;
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: .125rem;
-  grid-auto-flow: row dense;
-  align-items: start;
+  column-count: 3;
+  column-gap: 0;
 }
   /*grid-auto-rows: minmax(100px, auto);*/
   /*max-width: 98vw;
