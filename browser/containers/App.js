@@ -13,9 +13,9 @@ function formatPhotos(photos) {
     return {
       id: photo.id,
       gallerySrc: 'images/gallery/' + photo.path,
-      thumbnailSrc: 'images/thumbnail/' + photo.path,
-      thumbnailWidth: photo.thumbnail.width,
-      thumbnailHeight: photo.thumbnail.height,
+      src: 'images/thumbnail/' + photo.path,
+      width: photo.thumbnail.width,
+      height: photo.thumbnail.height,
     };
   });
 }

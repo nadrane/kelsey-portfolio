@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html server/main.js",
     "test": "./node_modules/.bin/mocha server/**/*.test.js --reporter spec",
-    "seed": "node seed/seed.js",
-    "postinstall": "npm run db-init"
+    "seed": "node seed/seed.js"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -23,6 +22,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-grid-gallery": "^0.3.6",
+    "react-measure": "1.4.6",
     "react-photo-gallery": "^5.6.1",
     "react-tap-event-plugin": "^2.0.1",
     "sequelize": "^3.24.1"
