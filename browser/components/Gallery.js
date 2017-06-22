@@ -2,13 +2,13 @@
 
 import React from "react";
 import Photo from "./Photo";
+import infiniteScroll from "../helpers/infinite-scroll";
 
-function Gallery({ photos }) {
+function Gallery({photos}) {
   return (
     <div className="gallery">
       { photos.map(photo => <Photo key={photo.id} {...photo} />) }
     </div>
   );
 }
-
-export default Gallery;
+export default infiniteScroll(300)(Gallery);
