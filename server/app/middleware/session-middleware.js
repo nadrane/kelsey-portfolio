@@ -10,4 +10,4 @@ router.use(session({
   resave: false,
   saveUninitialized: false,
   // cookie: { secure: true } enable later with https
-}))
+}));
