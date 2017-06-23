@@ -4,15 +4,29 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../components/Login";
 import NavBar from "../components/NavBar";
 import Gallery from "../components/Gallery";
-import { fetchImages } from "../utils";
+import { fetchImages, postJSON } from "../utils";
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: {},
       photos: [],
       loadingImages: false
     };
+
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+  }
+
+  handleLoginClick(e) {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    postJSON('/api/auth/login', {email, password})
+    .then(user => {
+      this.setState({user});
+    })
+    .catch(console.error.bind(console));
   }
 
   componentDidMount() {
@@ -45,13 +59,13 @@ export default class Main extends React.Component {
         <div id="main">
           <NavBar />
           <Switch>
-            <Route path="/" render={() =>
+            <Route exact path="/" render={() =>
                 <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
                 />}
             />
-            <Route path="/login" component={Login} />
+            <Route path="/login" render={() => <Login loginClickHandler={this.handleLoginClick}/>}/>
           </Switch>
         </div>
       </BrowserRouter>

@@ -4,16 +4,22 @@ const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 const env = require("../env");
 const db = require("../server/db/db");
-const models = require("../server/db/models");
-const Image = models.Image;
+const {Image, User} = require("../server/db/models");
 
 function seedDatabase() {
-  return Promise.all([seedTable("images", createImages)]);
+  return Promise.all([seedTable("images", createImages),
+                      seedTable("users", createUsers)
+                      ]);
 }
 
 function seedTable(tableName, cb) {
   console.log(`creating ${tableName}`);
-  return cb().then(() => console.log(`${tableName} created`));
+  return cb()
+    .then(() => console.log(`${tableName} created`))
+    .catch(err => {
+      console.log(`Error seeding ${tableName}\n`);
+      console.error(err);
+    })
 }
 
 function createImages() {
@@ -37,6 +43,14 @@ function createImages() {
           })
       });
     });
+}
+
+function createUsers() {
+  return User.create({
+    email: 'kelsey.thomas.hagen@gmail.com',
+    password: 'happyfeet',
+    isAdmin: true
+  });
 }
 
 db

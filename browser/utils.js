@@ -1,11 +1,29 @@
 import queryString from "query-string";
-import Promise from 'bluebird';
+import Promise from "bluebird";
 
-const fetchJSON = url => Promise.resolve(fetch(url)).then(parseResponse);
+const fetchJSON = url => {
+  const headers = new Headers({ Accept: "application/json" });
+  return Promise.resolve(
+    fetch(url, {
+      headers: headers
+    })
+  ).then(parseResponse);
+};
 
-const postJSON = (url, body) => Promise.resolve(fetch(url, {method: 'POST', body})).then(parseResponse);
+const postJSON = (url, body) => {
+  const headers = new Headers();
+  headers.set("Accept", "application/json");
+  headers.set("Content-Type", "application/json");
+  return Promise.resolve(
+    fetch(url, {
+      headers,
+      method: "POST",
+      body: JSON.stringify(body)
+    })
+  ).then(parseResponse);
+};
 
-const parseResponse = function (response) {
+const parseResponse = function(response) {
   var contentType = response.headers.get("content-type");
   if (contentType && contentType.indexOf("application/json") !== -1) {
     return response.json();
@@ -14,17 +32,21 @@ const parseResponse = function (response) {
   }
 };
 
-function definePaginationQuery(url, limit=15, offset=0) {
-  return function () {
-    const response = fetchJSON(url + '?' + queryString.stringify({
-      limit,
-      offset
-    }));
+function definePaginationQuery(url, limit = 15, offset = 0) {
+  return function() {
+    const response = fetchJSON(
+      url +
+        "?" +
+        queryString.stringify({
+          limit,
+          offset
+        })
+    );
     offset += limit;
     return response;
   };
 }
 
-const fetchImages = definePaginationQuery('/api/images/');
+const fetchImages = definePaginationQuery("/api/images/");
 
 export { fetchImages, postJSON, fetchJSON };
