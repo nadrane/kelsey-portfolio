@@ -5,7 +5,8 @@ const fetchJSON = url => {
   const headers = new Headers({ Accept: "application/json" });
   return Promise.resolve(
     fetch(url, {
-      headers: headers
+      headers: headers,
+      credentials: 'same-origin', // send cookies
     })
   ).then(parseResponse);
 };
@@ -18,6 +19,7 @@ const postJSON = (url, body) => {
     fetch(url, {
       headers,
       method: "POST",
+      credentials: 'same-origin', // send cookies
       body: JSON.stringify(body)
     })
   ).then(parseResponse);
