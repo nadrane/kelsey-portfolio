@@ -4,9 +4,11 @@
   "description": "A generated project at Fullstack Academy",
   "main": "server/main.js",
   "scripts": {
+    "start:dev": "NODE_ENV=development yarn start",
+    "start:prod": "NODE_ENV=production yarn start",
     "start": "webpack -w & nodemon --watch server -e js,html server/main.js",
     "test": "./node_modules/.bin/mocha server/**/*.test.js --reporter spec",
-    "seed": "node seed/seed.js"
+    "seed": "NODE_ENV=development node --prof seed/seed.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -38,6 +40,7 @@
     "easyimage": "^2.1.0",
     "imagemin": "^5.3.1",
     "imagemin-mozjpeg": "^6.0.0",
+    "minimist": "^1.2.0",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "webpack": "^2.2.1"
