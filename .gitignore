@@ -8,6 +8,7 @@ coverage
 **.mp4
 **.jpg
 **.png
+**.log
 server/audio/
 public/bundle.js
 public/bundle.js.map
