@@ -10,7 +10,6 @@ const env = require("../../env");
 app.use(morgan("dev"));
 
 app.use(express.static(env.PUBLIC_DIR));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(require("./middleware/pagination"));
