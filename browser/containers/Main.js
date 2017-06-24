@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "../components/Login";
 import NavBar from "../components/NavBar";
 import Gallery from "../components/Gallery";
-import { fetchImages, postJSON } from "../utils";
+import { fetchImages, postJSON, fetchJSON } from "../utils";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -29,8 +29,17 @@ export default class Main extends React.Component {
     .catch(console.error.bind(console));
   }
 
+  getLoggedInUser() {
+    return fetchJSON('/api/auth/me')
+      .then(user => {
+        this.setState({user});
+      });
+  }
+
   componentDidMount() {
-    this.fetchAdditionalPhotos();
+    return Promise.all([this.fetchAdditionalPhotos(), this.getLoggedInUser()])
+      .catch(console.error.bind(console));
+
   }
 
   fetchAdditionalPhotos() {

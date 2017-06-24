@@ -6,6 +6,10 @@ const bcrypt = require('bcryptjs');
 const { User } = require('../../db/models');
 const { AuthorizationError } = require('../errors');
 
+router.get('/me', (req, res, next) => {
+  res.send(req.session.user);
+});
+
 router.post('/login', (req, res, next) => {
   User.findOne({
     where: {

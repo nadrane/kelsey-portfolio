@@ -1,5 +1,5 @@
-const express = require('express');
-const router = module.exports = express.Router();
+const express = require("express");
+const router = (module.exports = express.Router());
 
 router.use(function(req, res, next) {
   if (req.query.limit) {
@@ -13,8 +13,6 @@ router.use(function(req, res, next) {
   req.pagination = {
     limit: req.query.limit,
     offset: req.query.offset
-  }
-  next()
-})
-
-
+  };
+  next();
+});
