@@ -9,22 +9,22 @@ import { fetchImages, postJSON, fetchJSON } from "../utils";
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', this.props)
     this.state = {
       user: {},
       photos: [],
       loadingImages: false
     };
-
-    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
-  handleLoginClick(e) {
+  handleLoginClick(history, e) {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     postJSON('/api/auth/login', {email, password})
     .then(user => {
       this.setState({user});
+      history.push('/');
     })
     .catch(console.error.bind(console));
   }
@@ -68,13 +68,16 @@ export default class Main extends React.Component {
         <div id="main">
           <NavBar />
           <Switch>
-            <Route exact path="/" render={() =>
-                <Gallery
+            <Route exact path="/" render={(props) => {
+                console.log('gal props', props);
+                return <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
-                />}
+                />}}
             />
-            <Route path="/login" render={() => <Login loginClickHandler={this.handleLoginClick}/>}/>
+            <Route path="/login" render={(props) => {
+              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>
+            }}/>
           </Switch>
         </div>
       </BrowserRouter>
