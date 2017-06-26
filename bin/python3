@@ -9,7 +9,7 @@ try:
   image.save(sys.stdout.buffer, "JPEG")
 except Exception:
   import traceback
-  sys.stderr.write("cannot create thumbnail for file being written to")
+  sys.stderr.write("cannot create thumbnail for file'")
   sys.stderr.write("\n\n")
   originalStdout = sys.stdout
   sys.stdout = sys.stderr
