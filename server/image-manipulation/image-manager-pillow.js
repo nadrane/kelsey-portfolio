@@ -7,12 +7,15 @@ async function createPillowImage(imagePath) {
     const obj = await createCompressable(imagePath);
 
     obj.save = async function(outputDir) {
-      return await fs.writeFileAsync(outputDir);
+      const outputPath = path.join(outputDir, this.fileName);
+      await fs.writeFileAsync(outputPath);
+      return this;
     }
 
-    obj.resize = async function(maxWidth, maxHeight) {
+    obj.resize = function(maxWidth, maxHeight) {
       this.buffer = resizeImage(this.buffer, maxWidth, maxHeight);
-    }
+      return this;
+    };
 
     return obj;
 }
