@@ -4,13 +4,25 @@ Promise = require("bluebird");
 const Jimp = require("jimp");
 const path = require("path");
 const _ = require('lodash');
-const imagemin = require("imagemin");
-const imageminMozjpeg = require("imagemin-mozjpeg");
+const createPILImage = require('../../image-manipulation/image-manager-pillow');
 
 const env = require('../../../env');
 const THUMBNAIL_SCALE_FACTOR = 0.25;
 const GALLERY_SCALE_FACTOR = 0.25;
 const ORIGINAL_SCALE_FACTOR = 0.25;
+
+const IMAGE_SPECS = {
+  thumbnail: {
+    outputDir: env.THUMBNAIL_IMAGES,
+    maxWidth: 500,
+    maxHeight: 750
+  },
+  gallery: {
+    outputDir: env.GALLERY_IMAGES,
+    maxWidth: 1500,
+    maxHeight: 2250
+  }
+}
 
 module.exports = (db, ImageVersion) => {
   return db.define("image", {
@@ -72,62 +84,32 @@ module.exports = (db, ImageVersion) => {
       }
     });
 
-  function createImageVersions(image) {
-    return Promise.all([
-      makeOriginalImageVersion(image),
-      makeGalleryImageVersion(image),
-      makeThumbnailImageVersion(image)
-    ])
-    .catch(err => console.error(err))
-    .then(([originalVersion, galleryVersion, thumbnailVersion]) => {
-      return Promise.all([
-        image.setOriginal(originalVersion),
-        image.setGallery(galleryVersion),
-        image.setThumbnail(thumbnailVersion)
-      ])
-    })
-  }
-
-  function makeThumbnailImageVersion(image) {
-    return makeScaledDownImageVersion(THUMBNAIL_SCALE_FACTOR, image, env.THUMBNAIL_IMAGES);
-  }
-  function makeGalleryImageVersion(image) {
-    return makeScaledDownImageVersion(GALLERY_SCALE_FACTOR, image, env.GALLERY_IMAGES);
-  }
-  function makeOriginalImageVersion(image) {
-    return makeScaledDownImageVersion(ORIGINAL_SCALE_FACTOR, image, env.ORIGINAL_IMAGES);
-  }
-
-  function makeScaledDownImageVersion(scalingFactor, image, dirname) {
-    const outputPath = path.join(dirname, image.path);
-    return scaleDownImage(image.data, scalingFactor)
-      .then(image => Promise.all([makeImageVersion(image), saveImage(image, outputPath), compressImage(image.bitmap.data)]))
-      .spread(imageVersion => imageVersion)
-      .catch(console.error.bind(console))
-  }
-
-  function scaleDownImage(buffer, scalingFactor) {
-    return Jimp.read(buffer).then(function (image) {
-      return image.scale(scalingFactor);
+  async function createImageVersions(image) {
+    const PILImage = await createPILImage(image.data);
+    const imageVersions = await makeImageVersions(PILImage);
+    return Promise.map(Object.keys(imageVersions), versionName => {
+      const setterFunction = 'set' + capitalize(versionName);
+      return image[setterFunction](imageVersions[versionName]);
     });
   }
 
-  function makeImageVersion(image) {
-    return ImageVersion.create({
-      width: image.bitmap.width,
-      height: image.bitmap.height
-    });
+  function makeImageVersions(PILImage) {
+    return Promise.props(_.mapValues(IMAGE_SPECS, (val, key) => prepareAndSaveImage(PILImage, val)))
   }
 
-  function saveImage(image, outputPath) {
-    console.log(`writing ${outputPath}`);
-    return image.write(outputPath);
+  async function prepareAndSaveImage(PILImage, { outputDir, maxWidth, maxHeight }) {
+    let imageVersion;
+    PILImage.resize(maxWidth, maxHeight);
+    [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress())
+    await PILImage.save(outputDir);
+    return imageVersion
   }
 
-  function compressImage(buffer) {
-    console.log('compressing image');
-    return imagemin.buffer(buffer, {
-      use: [imageminMozjpeg()]
-    });
+  function makeImageVersion(PILImage) {
+    return ImageVersion.create(PILImage.getDimensions());
   }
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

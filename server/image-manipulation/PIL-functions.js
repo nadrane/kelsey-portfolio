@@ -9,4 +9,14 @@ function resizeImage(buffer, maxWidth, maxHeight) {
   return execFileSync('python3', [executablePath, maxWidth, maxHeight], {input: buffer});
 }
 
-module.exports = resizeImage;
+function getDimensions(buffer) {
+  const executablePath = path.join(env.BIN_DIR, 'get-dimensions.py');
+  const dimensions = execFileSync('python3', [executablePath], {input: buffer})
+  const [width, height] = dimensions.toString().split(',');
+  return {
+    width,
+    height
+  }
+}
+
+module.exports = {resizeImage, getDimensions};
