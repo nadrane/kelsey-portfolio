@@ -85,12 +85,16 @@ module.exports = (db, ImageVersion) => {
     });
 
   async function createImageVersions(image) {
-    const PILImage = await createPILImage(image.data);
-    const imageVersions = await makeImageVersions(PILImage);
-    return Promise.map(Object.keys(imageVersions), versionName => {
-      const setterFunction = 'set' + capitalize(versionName);
-      return image[setterFunction](imageVersions[versionName]);
-    });
+    try {
+      const PILImage = await createPILImage(image.data);
+      const imageVersions = await makeImageVersions(PILImage);
+      return Promise.map(Object.keys(imageVersions), versionName => {
+        const setterFunction = 'set' + capitalize(versionName);
+        return image[setterFunction](imageVersions[versionName]);
+      });
+    } catch(err) {
+      console.log('error is here', err, err.stack)
+    }
   }
 
   function makeImageVersions(PILImage) {
@@ -99,14 +103,14 @@ module.exports = (db, ImageVersion) => {
 
   async function prepareAndSaveImage(PILImage, { outputDir, maxWidth, maxHeight }) {
     let imageVersion;
-    PILImage.resize(maxWidth, maxHeight);
+    await PILImage.resize(maxWidth, maxHeight);
     [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress())
     await PILImage.save(outputDir);
     return imageVersion
   }
 
-  function makeImageVersion(PILImage) {
-    return ImageVersion.create(PILImage.getDimensions());
+  async function makeImageVersion(PILImage) {
+    return ImageVersion.create(await PILImage.getDimensions());
   }
 }
 

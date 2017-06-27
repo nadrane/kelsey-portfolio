@@ -10,8 +10,8 @@ try:
 except Exception:
   import traceback
   sys.stderr.write("cannot create thumbnail for file being written to")
-  sys.stderr.write("\n\n")
   originalStdout = sys.stdout
   sys.stdout = sys.stderr
+  sys.stderr.write("\n\n")
   traceback.print_exc()
   sys.stdout = originalStdout

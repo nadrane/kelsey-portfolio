@@ -5,9 +5,9 @@ const path = require('path');
 const { resizeImage, getDimensions } = require('./PIL-functions');
 
 const PILImage = {
-    getDimensions: function() {
+    getDimensions: async function() {
       if (!this.height || !this.width) {
-        const dimensions = getDimensions(this.buffer);
+        const dimensions = await getDimensions(this.buffer);
         this.width = dimensions.height;
         this.height = dimensions.width;
       }
@@ -23,8 +23,8 @@ const PILImage = {
       return this;
     },
 
-    resize: function(maxWidth, maxHeight) {
-      this.buffer = resizeImage(this.buffer, maxWidth, maxHeight);
+    resize: async function(maxWidth, maxHeight) {
+      this.buffer = await resizeImage(this.buffer, maxWidth, maxHeight);
       return this;
     }
 }

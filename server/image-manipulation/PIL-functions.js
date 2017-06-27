@@ -1,22 +1,45 @@
-Promise = require('bluebird');
-const path = require('path');
-const execFileSync = require('child_process').execFileSync;
-const fs = require('fs')
-const env = require('../../env');
+Promise = require("bluebird");
+const path = require("path");
+const execFile = require("child_process").execFile;
+const fs = require("fs");
+const env = require("../../env");
 
 function resizeImage(buffer, maxWidth, maxHeight) {
-  const executablePath = path.join(env.BIN_DIR, 'resize-image.py');
-  return execFileSync('python3', [executablePath, maxWidth, maxHeight], {input: buffer});
+  return new Promise(function(resolve, reject) {
+    const executablePath = path.join(env.BIN_DIR, "resize-image.py");
+    const child = execFile(
+      "python3",
+      [executablePath, maxWidth, maxHeight],
+      { maxBuffer: 10000 * 1024, encoding: "buffer" },
+      function(err, stdout, stderr) {
+        if (err || stderr.toString()) reject(err || new Error(stderr.toString()));
+        resolve(stdout);
+      }
+    );
+    child.stdin.write(buffer);
+    child.stdin.end();
+  });
 }
 
 function getDimensions(buffer) {
-  const executablePath = path.join(env.BIN_DIR, 'get-dimensions.py');
-  const dimensions = execFileSync('python3', [executablePath], {input: buffer})
-  const [width, height] = dimensions.toString().split(',');
-  return {
-    width,
-    height
-  }
+  return new Promise(function(resolve, reject) {
+    const executablePath = path.join(env.BIN_DIR, "get-dimensions.py");
+    const child = execFile(
+      "python3",
+      [executablePath],
+      { maxBuffer: 200 * 1024 },
+      function(err, stdout, stderr) {
+        if (err || stderr) reject(err || new Error(stderr));
+        const [width, height] = stdout.toString().split(",");
+        resolve({
+          width,
+          height
+        });
+      }
+    );
+    child.stdin.write(buffer);
+    child.stdin.end();
+  });
 }
 
-module.exports = {resizeImage, getDimensions};
+module.exports = { resizeImage, getDimensions };
