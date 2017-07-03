@@ -1,15 +1,10 @@
 "use strict";
 
 import React from "react";
-import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+import Button from './Button'
 
-const contactStyle = {
-  marginLeft: '0px',
-  marginRight: '0px',
-}
-
-function NavBar() {
+function NavBar({user}) {
   return (
     <Toolbar>
       <ToolbarGroup>
@@ -18,7 +13,8 @@ function NavBar() {
       <ToolbarGroup>
         <ToolbarTitle text={"Photos"} />
         <ToolbarTitle text={"About Me"} />
-        <RaisedButton label="Contact" style={contactStyle} primary={true} />
+        <Button label="Contact" primary={true} />
+        { user.isAdmin ? <Button label="Manage Photos" primary={true}/> : null }
       </ToolbarGroup>
     </Toolbar>
   )
