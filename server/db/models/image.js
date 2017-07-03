@@ -13,12 +13,10 @@ const ORIGINAL_SCALE_FACTOR = 0.25;
 
 const IMAGE_SPECS = {
   thumbnail: {
-    outputDir: env.THUMBNAIL_IMAGES,
     maxWidth: 500,
     maxHeight: 750
   },
   gallery: {
-    outputDir: env.GALLERY_IMAGES,
     maxWidth: 1500,
     maxHeight: 2250
   }
@@ -26,10 +24,6 @@ const IMAGE_SPECS = {
 
 module.exports = (db, ImageVersion) => {
   return db.define("image", {
-    path: {
-      type: db.Sequelize.STRING,
-      allowNull: false
-    },
     title: {
       type: db.Sequelize.STRING,
       allowNull: true
@@ -101,16 +95,19 @@ module.exports = (db, ImageVersion) => {
     return Promise.props(_.mapValues(IMAGE_SPECS, (val, key) => prepareAndSaveImage(PILImage, val)))
   }
 
-  async function prepareAndSaveImage(PILImage, { outputDir, maxWidth, maxHeight }) {
+  async function prepareAndSaveImage(PILImage, { maxWidth, maxHeight }) {
     let imageVersion;
     await PILImage.resize(maxWidth, maxHeight);
-    [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress())
-    await PILImage.save(outputDir);
-    return imageVersion
+    [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress());
+    await PILImage.save(path.join(env.PUBLIC_DIR, 'images'));
+    return imageVersion;
   }
 
   async function makeImageVersion(PILImage) {
-    return ImageVersion.create(await PILImage.getDimensions());
+    return ImageVersion.create(
+      Object.assign({fileName: PILImage.fileName},
+      await PILImage.getDimensions()
+    ));
   }
 }
 

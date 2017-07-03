@@ -8,5 +8,9 @@ module.exports = db => db.define('image_version', {
   height: {
     type: db.Sequelize.INTEGER,
     allowNull: false
+  },
+  fileName: {
+    type: db.Sequelize.STRING,
+    allowNull: false
   }
 })
