@@ -7,5 +7,5 @@ const style = {
 }
 
 export default function Button(props) {
-  return <Button style={style} {...props} />
+  return <RaisedButton style={style} {...props} />
 }
