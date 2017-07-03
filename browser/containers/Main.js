@@ -9,7 +9,6 @@ import { fetchImages, postJSON, fetchJSON } from "../utils";
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', this.props)
     this.state = {
       user: {},
       photos: [],
@@ -54,8 +53,8 @@ export default class Main extends React.Component {
     return photos.map(photo => {
       return {
         id: photo.id,
-        gallerySrc: "images/gallery/" + photo.path,
-        thumbnailSrc: "images/thumbnail/" + photo.path,
+        gallerySrc: "images/" + photo.gallery.fileName,
+        thumbnailSrc: "images/" + photo.thumbnail.fileName,
         thumbnailWidth: photo.thumbnail.width,
         thumbnailHeight: photo.thumbnail.height
       };
@@ -66,10 +65,9 @@ export default class Main extends React.Component {
     return (
       <BrowserRouter>
         <div id="main">
-          <NavBar />
+          <NavBar user={this.state.user}/>
           <Switch>
             <Route exact path="/" render={(props) => {
-                console.log('gal props', props);
                 return <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
