@@ -40,6 +40,6 @@ router.delete("/:imageId", function(req, res, next) {
 
 function getAllImages(req) {
   return Image.findAll(
-    req.pagination
+    Object.assign({}, req.pagination, {order: ['id']})
   );
 }
