@@ -57,13 +57,8 @@ export default class Main extends React.Component {
     return photos.map(photo => {
       return {
         id: photo.id,
-<<<<<<< HEAD:browser/containers/Main.js
-        gallerySrc: "images/" + photo.gallery.fileName,
-        thumbnailSrc: "images/" + photo.thumbnail.fileName,
-=======
         gallerySrc: 'images/' + photo.gallery.fileName,
         thumbnailSrc: 'images/' + photo.thumbnail.fileName,
->>>>>>> upToDate:browser/react/components/Main.js
         thumbnailWidth: photo.thumbnail.width,
         thumbnailHeight: photo.thumbnail.height
       };
@@ -77,12 +72,6 @@ export default class Main extends React.Component {
 
     return (
       <BrowserRouter>
-<<<<<<< HEAD:browser/containers/Main.js
-        <div id="main">
-          <NavBar user={this.state.user}/>
-          <Switch>
-            <Route exact path="/" render={(props) => {
-=======
         <div style={wrapperStyle} id="main">
           <NavBar user={this.state.user}/>
           <Switch>
@@ -90,7 +79,6 @@ export default class Main extends React.Component {
               return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>;
             }}/>
             <Route render={() => {
->>>>>>> upToDate:browser/react/components/Main.js
                 return <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
