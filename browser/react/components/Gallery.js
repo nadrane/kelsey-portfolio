@@ -1,13 +1,16 @@
 "use strict";
 
 import React from "react";
-import Photo from "./Photo";
-import infiniteScroll from "./infinite-scroll";
+import infiniteScroll from "../infiniteScroll";
 
 function Gallery({photos}) {
+  photos.sort((a,b) => a.id - b.id).forEach(photo => console.log('id', photo.id, photo.thumbnailSrc));
   return (
     <div className="gallery">
-      { photos.map(photo => <Photo key={photo.id} {...photo} />) }
+      { photos.map(photo => {
+          return <img key={photo.id} src={photo.thumbnailSrc} className="photo" />;
+        })
+      }
     </div>
   );
 }

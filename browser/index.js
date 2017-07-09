@@ -2,11 +2,9 @@
 
 import ReactDOM from "react-dom";
 import React from "react";
-import Main from "./containers/Main";
-
-injectTapEventPlugin();
+import Main from "./react/components/Main";
 
 ReactDOM.render(
-  <Main />
+  <Main />,
   document.getElementById("app")
 );
