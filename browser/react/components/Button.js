@@ -4,7 +4,7 @@ const defaultStyle = {
   fontFamily: "Robto",
   color: "rgba(0, 0, 0, 0.4)",
   fontSize: "20px",
-  backgroundColor: "#2494ff",
+  backgroundColor: "rgba(94, 54, 54, 0.38)",
   padding: "7px 12px",
   border: "none",
   borderRadius: "8px"

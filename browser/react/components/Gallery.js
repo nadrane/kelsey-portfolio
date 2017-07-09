@@ -2,7 +2,7 @@
 
 import React from "react";
 import Photo from "./Photo";
-import infiniteScroll from "../helpers/infinite-scroll";
+import infiniteScroll from "./infinite-scroll";
 
 function Gallery({photos}) {
   return (
