@@ -12,9 +12,9 @@ const argv = require('minimist')(process.argv.slice(2));
 function seedDatabase() {
   return Promise.all([seedTable("images", createImages),
                       seedTable("users", createUsers),
-                      seedTable('tags', createTags)
+                      //seedTable('tags', createTags)
                       ])
-          .then(applyTagsToImages);
+          //.then(applyTagsToImages);
 }
 
 function seedTable(tableName, cb) {
@@ -39,9 +39,6 @@ function createImages() {
               path: imagePath,
               data: imageData.toString('base64')
             });
-          })
-          .then(image => {
-            console.log(`finished seeding ${image.path}`);
           })
           .catch(err => {
             console.log('Failed to seed file');

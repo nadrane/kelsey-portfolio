@@ -2,15 +2,9 @@
 
 import ReactDOM from "react-dom";
 import React from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import Main from "./containers/Main";
-
-injectTapEventPlugin();
+import Main from "./react/components/Main";
 
 ReactDOM.render(
-  <MuiThemeProvider>
-    <Main />
-  </MuiThemeProvider>,
+  <Main />,
   document.getElementById("app")
 );

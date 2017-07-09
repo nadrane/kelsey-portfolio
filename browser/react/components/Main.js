@@ -1,10 +1,13 @@
+"use strict";
+
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Login from "../components/Login";
-import NavBar from "../components/NavBar";
-import Gallery from "../components/Gallery";
-import { fetchImages, postJSON, fetchJSON } from "../utils";
+import Login from "./Login";
+import Gallery from "./Gallery";
+import NavBar from "../UIComponents/NavBar";
+import { fetchImages, postJSON, fetchJSON } from "../../http";
+import { logError } from "../../loggers";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -25,14 +28,15 @@ export default class Main extends React.Component {
       this.setState({user});
       history.push('/');
     })
-    .catch(console.error.bind(console));
+    .catch(logError);
   }
 
   getLoggedInUser() {
     return fetchJSON('/api/auth/me')
       .then(user => {
         this.setState({user});
-      });
+      })
+      .catch(logError);
   }
 
   componentDidMount() {
@@ -43,8 +47,8 @@ export default class Main extends React.Component {
 
   fetchAdditionalPhotos() {
     return fetchImages().then(photos => {
-      this.setState({
-        photos: [...this.state.photos, ...this.formatPhotos(photos)]
+      this.setState(prevState => {
+        return { photos: [...prevState.photos, ...this.formatPhotos(photos)] };
       });
     });
   }
@@ -53,8 +57,13 @@ export default class Main extends React.Component {
     return photos.map(photo => {
       return {
         id: photo.id,
+<<<<<<< HEAD:browser/containers/Main.js
         gallerySrc: "images/" + photo.gallery.fileName,
         thumbnailSrc: "images/" + photo.thumbnail.fileName,
+=======
+        gallerySrc: 'images/' + photo.gallery.fileName,
+        thumbnailSrc: 'images/' + photo.thumbnail.fileName,
+>>>>>>> upToDate:browser/react/components/Main.js
         thumbnailWidth: photo.thumbnail.width,
         thumbnailHeight: photo.thumbnail.height
       };
@@ -62,20 +71,31 @@ export default class Main extends React.Component {
   }
 
   render() {
+    const wrapperStyle = {
+      margin: "0 0.5rem 0.5rem 0.5rem",
+    };
+
     return (
       <BrowserRouter>
+<<<<<<< HEAD:browser/containers/Main.js
         <div id="main">
           <NavBar user={this.state.user}/>
           <Switch>
             <Route exact path="/" render={(props) => {
+=======
+        <div style={wrapperStyle} id="main">
+          <NavBar user={this.state.user}/>
+          <Switch>
+            <Route path="/login" render={(props) => {
+              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>;
+            }}/>
+            <Route render={() => {
+>>>>>>> upToDate:browser/react/components/Main.js
                 return <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
-                />}}
+                />;}}
             />
-            <Route path="/login" render={(props) => {
-              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>
-            }}/>
           </Switch>
         </div>
       </BrowserRouter>
