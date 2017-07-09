@@ -1,0 +1,11 @@
+.nav-bar-link:hover {
+  background-color: rgba(128, 128, 128, .4);
+}
+
+.nav-bar-link {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#brand {
+  color: rgba(0, 0, 0, 0.6);
+}

@@ -7,7 +7,7 @@ const defaultStyle = {
   color: "rgba(0, 0, 0, 0.4)",
   fontSize: "20px",
   backgroundColor: "rgba(94, 54, 54, 0.38)",
-  padding: "7px 12px",
+  padding: "5px 3px",
   border: "none",
   borderRadius: "8px"
 };
