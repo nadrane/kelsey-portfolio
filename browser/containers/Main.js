@@ -69,15 +69,15 @@ export default class Main extends React.Component {
         <div id="main">
           <NavBar user={this.state.user}/>
           <Switch>
-            <Route exact path="/" render={(props) => {
+            <Route path="/login" render={(props) => {
+              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>
+            }}/>
+            <Route render={() => {
                 return <Gallery
                   scrollHandler={this.fetchAdditionalPhotos.bind(this)}
                   photos={this.state.photos}
                 />}}
             />
-            <Route path="/login" render={(props) => {
-              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>
-            }}/>
           </Switch>
         </div>
       </BrowserRouter>
