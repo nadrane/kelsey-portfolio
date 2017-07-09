@@ -44,8 +44,8 @@ export default class Main extends React.Component {
 
   fetchAdditionalPhotos() {
     return fetchImages().then(photos => {
-      this.setState({
-        photos: [...this.state.photos, ...this.formatPhotos(photos)]
+      this.setState(prevState => {
+        return { photos: [...prevState.photos, ...this.formatPhotos(photos)] };
       });
     });
   }
