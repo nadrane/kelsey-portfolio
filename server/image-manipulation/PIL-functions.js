@@ -21,7 +21,7 @@ function resizeImage(buffer, maxWidth, maxHeight) {
   });
 }
 
-function getDimensions(buffer) {
+function calculateDimensions(buffer) {
   return new Promise(function(resolve, reject) {
     const executablePath = path.join(env.BIN_DIR, "get-dimensions.py");
     const child = execFile(
@@ -42,4 +42,4 @@ function getDimensions(buffer) {
   });
 }
 
-module.exports = { resizeImage, getDimensions };
+module.exports = { resizeImage, calculateDimensions };

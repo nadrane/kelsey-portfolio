@@ -2,19 +2,23 @@ const createCompressable = require('./image-manager-base');
 Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
-const { resizeImage, getDimensions } = require('./PIL-functions');
+const { resizeImage, calculateDimensions } = require('./PIL-functions');
 
 const PILImage = {
     getDimensions: async function() {
       if (!this.height || !this.width) {
-        const dimensions = await getDimensions(this.buffer);
-        this.width = dimensions.height;
-        this.height = dimensions.width;
+        await this.calculateAndSetDimensions();
       }
       return {
         width: this.width,
         height: this.height
       }
+    },
+
+    calculateAndSetDimensions: async function() {
+      const dimensions = await calculateDimensions(this.buffer);
+      this.width = dimensions.height;
+      this.height = dimensions.width;
     },
 
     save: async function(outputDir) {
@@ -25,6 +29,7 @@ const PILImage = {
 
     resize: async function(maxWidth, maxHeight) {
       this.buffer = await resizeImage(this.buffer, maxWidth, maxHeight);
+      await this.calculateAndSetDimensions()
       return this;
     }
 }
@@ -34,7 +39,5 @@ async function createPILImage(buffer) {
     Object.assign(obj, await createCompressable(buffer));
     return obj;
 }
-
-
 
 module.exports = createPILImage;

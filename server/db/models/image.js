@@ -14,7 +14,7 @@ const ORIGINAL_SCALE_FACTOR = 0.25;
 const IMAGE_SPECS = {
   thumbnail: {
     maxWidth: 500,
-    maxHeight: 750
+    maxHeight: 2000
   },
   gallery: {
     maxWidth: 1500,
@@ -80,10 +80,10 @@ module.exports = (db, ImageVersion) => {
 
   async function createImageVersions(image) {
     try {
-      const PILImage = await createPILImage(image.data);
-      const imageVersions = await makeImageVersions(PILImage);
+      const imageVersions = await makeImageVersions(image);
       return Promise.map(Object.keys(imageVersions), versionName => {
         const setterFunction = 'set' + capitalize(versionName);
+        console.log('setter func', versionName, setterFunction, imageVersions[versionName])
         return image[setterFunction](imageVersions[versionName]);
       });
     } catch(err) {
@@ -91,12 +91,13 @@ module.exports = (db, ImageVersion) => {
     }
   }
 
-  function makeImageVersions(PILImage) {
-    return Promise.props(_.mapValues(IMAGE_SPECS, (val, key) => prepareAndSaveImage(PILImage, val)))
+  function makeImageVersions(image) {
+    return Promise.props(_.mapValues(IMAGE_SPECS, dimensions => prepareAndSaveImage(image, dimensions)))
   }
 
-  async function prepareAndSaveImage(PILImage, { maxWidth, maxHeight }) {
+  async function prepareAndSaveImage(image, { maxWidth, maxHeight }) {
     let imageVersion;
+    let PILImage = await createPILImage(image.data);
     await PILImage.resize(maxWidth, maxHeight);
     [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress());
     await PILImage.save(path.join(env.PUBLIC_DIR, 'images'));

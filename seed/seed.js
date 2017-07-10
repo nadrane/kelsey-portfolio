@@ -2,6 +2,7 @@ var Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 const _ = require('lodash');
+const rimraf = require('rimraf');
 
 const env = require("../env");
 const db = require("../server/db/db");
@@ -24,10 +25,12 @@ function seedTable(tableName, cb) {
     .catch(err => {
       console.log(`Error seeding ${tableName}\n`);
       console.error(err);
-    })
+    });
 }
 
 function createImages() {
+  rimraf.sync(path.join(env.PUBLIC_DIR, 'images'));
+  fs.mkdirSync(path.join(env.PUBLIC_DIR, 'images'));
   return fs.readdirAsync(env.SEED_IMAGES)
     .then(images => images.filter(path => !path.startsWith('.')))
     .then(images => images.filter((_, i) => i < (argv.n || Infinity)))

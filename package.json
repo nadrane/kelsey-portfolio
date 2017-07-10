@@ -39,6 +39,7 @@
     "imagemin": "^5.3.1",
     "imagemin-mozjpeg": "^6.0.0",
     "minimist": "^1.2.0",
+    "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "webpack": "^2.2.1"
   }
