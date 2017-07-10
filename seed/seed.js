@@ -1,5 +1,5 @@
-var Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const bluebird = require('bluebird');
+const fs = bluebird.promisifyAll(require('fs'));
 const path = require('path');
 const _ = require('lodash');
 const rimraf = require('rimraf');
@@ -11,10 +11,10 @@ const argv = require('minimist')(process.argv.slice(2));
 
 
 function seedDatabase() {
-  return Promise.all([seedTable("images", createImages),
+  return bluebird.all([seedTable("images", createImages),
                       seedTable("users", createUsers),
                       //seedTable('tags', createTags)
-                      ])
+                      ]);
           //.then(applyTagsToImages);
 }
 
@@ -35,7 +35,7 @@ function createImages() {
     .then(images => images.filter(path => !path.startsWith('.')))
     .then(images => images.filter((_, i) => i < (argv.n || Infinity)))
     .then(images => {
-      return Promise.map(images, imagePath => {
+      return bluebird.map(images, imagePath => {
         return fs.readFileAsync(path.join(env.SEED_IMAGES, imagePath))
           .then(imageData => {
             return Image.create({
@@ -60,7 +60,7 @@ function createUsers() {
 }
 
 function createTags() {
-  return Promise.map(['penguin', 'antartica', 'flower', 'sea lion', 'whale', 'sierra'], tag => {
+  return bluebird.map(['penguin', 'antartica', 'flower', 'sea lion', 'whale', 'sierra'], tag => {
     return Tag.create({
       name: tag
     });
@@ -68,7 +68,7 @@ function createTags() {
 }
 
 function applyTagsToImages(images, users, tags) {
-  return Promise.map(_.range(0, _.random(0, 5)), () => {
+  return bluebird.map(_.range(0, _.random(0, 5)), () => {
     images.setTag(tags[_.random(tags.length - 1)]);
   });
 }

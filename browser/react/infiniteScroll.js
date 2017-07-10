@@ -27,8 +27,8 @@ export default function infiniteScroll(threshold) {
       }
 
       render() {
-        return <InnerComponent {...this.props} />
+        return <InnerComponent {...this.props} />;
       }
     };
-  }
+  };
 }

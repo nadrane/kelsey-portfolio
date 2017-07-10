@@ -13,7 +13,7 @@ const wrapperStyle = {
 const anchorStyle = {
   textDecoration: "none",
   backgroundColor: "none",
-}
+};
 
 export default function NavBarLink(props) {
   Object.assign(wrapperStyle, props.style);

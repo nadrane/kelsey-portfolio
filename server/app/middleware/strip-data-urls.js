@@ -8,4 +8,4 @@ router.use((req, res, next) => {
     return parsed ? parsed.data : value;
   });
   next();
-})
+});

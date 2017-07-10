@@ -1,15 +1,11 @@
 "use strict";
 
-Promise = require("bluebird");
-const Jimp = require("jimp");
+const bluebird = require("bluebird");
 const path = require("path");
 const _ = require('lodash');
 const createPILImage = require('../../image-manipulation/image-manager-pillow');
 
 const env = require('../../../env');
-const THUMBNAIL_SCALE_FACTOR = 0.25;
-const GALLERY_SCALE_FACTOR = 0.25;
-const ORIGINAL_SCALE_FACTOR = 0.25;
 
 const IMAGE_SPECS = {
   thumbnail: {
@@ -20,7 +16,7 @@ const IMAGE_SPECS = {
     maxWidth: 1500,
     maxHeight: 2250
   }
-}
+};
 
 module.exports = (db, ImageVersion) => {
   return db.define("image", {
@@ -61,9 +57,9 @@ module.exports = (db, ImageVersion) => {
                 Object.assign({ include: [ImageVersion] }, whereClause, req.pagination)
               );
             } else {
-              return Promise.resolve([]);
+              return bluebird.resolve([]);
             }
-          })
+          });
         }
       },
       hooks: {
@@ -81,25 +77,24 @@ module.exports = (db, ImageVersion) => {
   async function createImageVersions(image) {
     try {
       const imageVersions = await makeImageVersions(image);
-      return Promise.map(Object.keys(imageVersions), versionName => {
+      return bluebird.map(Object.keys(imageVersions), versionName => {
         const setterFunction = 'set' + capitalize(versionName);
-        console.log('setter func', versionName, setterFunction, imageVersions[versionName])
         return image[setterFunction](imageVersions[versionName]);
       });
     } catch(err) {
-      console.log('error is here', err, err.stack)
+      console.error('error is here', err, err.stack);
     }
   }
 
   function makeImageVersions(image) {
-    return Promise.props(_.mapValues(IMAGE_SPECS, dimensions => prepareAndSaveImage(image, dimensions)))
+    return bluebird.props(_.mapValues(IMAGE_SPECS, dimensions => prepareAndSaveImage(image, dimensions)));
   }
 
   async function prepareAndSaveImage(image, { maxWidth, maxHeight }) {
     let imageVersion;
     let PILImage = await createPILImage(image.data);
     await PILImage.resize(maxWidth, maxHeight);
-    [imageVersion, PILImage] = await Promise.join(makeImageVersion(PILImage), PILImage.compress());
+    [imageVersion, PILImage] = await bluebird.join(makeImageVersion(PILImage), PILImage.compress());
     await PILImage.save(path.join(env.PUBLIC_DIR, 'images'));
     return imageVersion;
   }
@@ -110,7 +105,7 @@ module.exports = (db, ImageVersion) => {
       await PILImage.getDimensions()
     ));
   }
-}
+};
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);

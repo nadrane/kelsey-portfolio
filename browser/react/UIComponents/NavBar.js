@@ -7,7 +7,7 @@ import Button from './Button';
 const navBarStyle = {
   backgroundColor: "rgb(211,211,211)",
   padding: "0.5rem 0",
-}
+};
 
 const menuBarStyle = {
   paddingRight: "1rem"
@@ -24,7 +24,7 @@ function NavBar({user}) {
         { user.isAdmin ? <NavBarLink className="pure-menu-item" to="/upload">Manage Photos</NavBarLink> : null }
       </div>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

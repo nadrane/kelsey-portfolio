@@ -13,4 +13,4 @@ module.exports = db => db.define('image_version', {
     type: db.Sequelize.STRING,
     allowNull: false
   }
-})
+});

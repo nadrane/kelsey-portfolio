@@ -1,31 +1,24 @@
-'use strict';
-/* eslint-disable global-require */
+"use strict";
 
-var chalk = require('chalk');
-var db = require('./db');
+const chalk = require("chalk");
+const db = require("./db");
 
-// Create a node server instance! cOoL!
-var server = require('http').createServer();
+const server = require("http").createServer();
 
-var createApplication = function () {
-    var app = require('./app');
-    server.on('request', app); // Attach the Express application.
+const createApplication = function() {
+  const app = require("./app");
+  server.on("request", app); // Attach the Express application.
 };
 
-var startServer = function () {
+const startServer = function() {
+  const PORT = process.env.PORT || 1337;
 
-    var PORT = process.env.PORT || 1337;
-
-    server.listen(PORT, function () {
-        console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
-    });
-
+  server.listen(PORT, function() {
+    console.log(chalk.blue("Server started on port", chalk.magenta(PORT)));
+  });
 };
 
-db
-.then(createApplication)
-.then(startServer)
-.catch(function (err) {
-    console.error(chalk.red(err.stack));
-    process.exit(1);
+db.then(createApplication).then(startServer).catch(function(err) {
+  console.error(chalk.red(err.stack));
+  process.exit(1);
 });

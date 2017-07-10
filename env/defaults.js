@@ -10,4 +10,4 @@ module.exports = {
     BIN_DIR,
     NODE_MODULES,
     SEED_IMAGES: path.join(ROOT, 'seed', 'seedImages'),
-}
+};

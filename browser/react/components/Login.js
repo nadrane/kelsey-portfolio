@@ -14,5 +14,5 @@ export default function Login({loginClickHandler}) {
       </div>
       <button type="submit">Login</button>
     </form>
-  )
+  );
 }

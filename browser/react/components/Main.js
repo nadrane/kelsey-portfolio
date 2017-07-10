@@ -57,7 +57,7 @@ export default class Main extends React.Component {
 
   formatPhotos(photos) {
     return photos.map(photo => {
-      console.log('photo', photo)
+      console.log('photo', photo);
       return {
         id: photo.id,
         gallerySrc: 'images/' + photo.gallery.fileName,

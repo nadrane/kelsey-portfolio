@@ -7,4 +7,4 @@ module.exports = db => db.define('tag', {
     allowNull: false,
   },
 
-})
+});

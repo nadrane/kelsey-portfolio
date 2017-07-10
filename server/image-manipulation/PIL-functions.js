@@ -1,11 +1,10 @@
-Promise = require("bluebird");
+const bluebird = require("bluebird");
 const path = require("path");
 const execFile = require("child_process").execFile;
-const fs = require("fs");
 const env = require("../../env");
 
 function resizeImage(buffer, maxWidth, maxHeight) {
-  return new Promise(function(resolve, reject) {
+  return new bluebird(function(resolve, reject) {
     const executablePath = path.join(env.BIN_DIR, "resize-image.py");
     const child = execFile(
       "python3",
@@ -22,7 +21,7 @@ function resizeImage(buffer, maxWidth, maxHeight) {
 }
 
 function calculateDimensions(buffer) {
-  return new Promise(function(resolve, reject) {
+  return new bluebird(function(resolve, reject) {
     const executablePath = path.join(env.BIN_DIR, "get-dimensions.py");
     const child = execFile(
       "python3",

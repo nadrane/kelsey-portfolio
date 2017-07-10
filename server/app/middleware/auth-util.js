@@ -5,6 +5,6 @@ const adminOnly = (req, res, next) => {
     next(new AuthorizationError('You are not authorized to make this request'));
   }
   next();
-}
+};
 
 module.exports.adminOnly = adminOnly;
