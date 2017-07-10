@@ -17,7 +17,6 @@ export default class Main extends React.Component {
     this.state = {
       user: {},
       photos: [],
-      loadingImages: false
     };
   }
 
@@ -49,6 +48,7 @@ export default class Main extends React.Component {
 
   fetchAdditionalPhotos() {
     return fetchImages().then(photos => {
+      if (photos.length === 0) return;  // No additional photos from server
       this.setState(prevState => {
         return { photos: [...prevState.photos, ...this.formatPhotos(photos)] };
       });
@@ -57,7 +57,6 @@ export default class Main extends React.Component {
 
   formatPhotos(photos) {
     return photos.map(photo => {
-      console.log('photo', photo);
       return {
         id: photo.id,
         gallerySrc: 'images/' + photo.gallery.fileName,
@@ -83,10 +82,10 @@ export default class Main extends React.Component {
               return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>;
             }}/>
             <Route render={() => {
-                return <Gallery
-                  scrollHandler={this.fetchAdditionalPhotos.bind(this)}
-                  photos={this.state.photos}
-                />;}}
+              return <Gallery
+                scrollHandler={this.fetchAdditionalPhotos.bind(this)}
+                photos={this.state.photos}
+              />;}}
             />
           </Switch>
         </div>

@@ -8,10 +8,16 @@ export default function infiniteScroll(threshold) {
         this.state = {
           loading: false
         };
+
+        this.scrollHandler = this.scrollHandler.bind(this);
       }
 
       componentDidMount() {
-        window.addEventListener("scroll", this.scrollHandler.bind(this));
+        window.addEventListener("scroll", this.scrollHandler);
+      }
+
+      componentWillUnmount() {
+        window.removeEventListener("scroll", this.scrollHandler);
       }
 
       scrollHandler() {
