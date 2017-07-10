@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Login from "./Login";
 import Gallery from "./Gallery";
+import UploadPhoto from "./UploadPhoto";
+
 import NavBar from "../UIComponents/NavBar";
 import { fetchImages, postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";
@@ -75,6 +77,7 @@ export default class Main extends React.Component {
         <div style={wrapperStyle} id="main">
           <NavBar user={this.state.user}/>
           <Switch>
+            <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
               return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>;
             }}/>
