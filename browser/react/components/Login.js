@@ -26,7 +26,7 @@ export default function Login({ loginClickHandler }) {
           <input style={inputStyle} name="email" placeholder="kelsey@gmail.com" />
         </div>
         <div className="pure-control-group">
-          <input style={inputStyle} name="password" placeholder="password" />
+          <input style={inputStyle} name="password" type="password" placeholder="password" />
         </div>
         <button style={buttonStyle} className="pure-button pure-button-primary" type="submit">Login</button>
       </fieldset>
