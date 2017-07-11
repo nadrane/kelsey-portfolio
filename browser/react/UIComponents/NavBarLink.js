@@ -4,7 +4,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const wrapperStyle = {
-  fontFamily: "Robto",
+  fontFamily: "skia",
+  fontSize: ".75rem",
   padding: ".05rem 0 .05rem 1rem",
   margin: "auto 0",
   float: "right",

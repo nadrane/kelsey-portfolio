@@ -27,6 +27,7 @@
     "query-string": "^4.3.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-image-lightbox": "^4.1.0",
     "react-router-dom": "^4.1.1",
     "sequelize": "^3.24.1"
   },

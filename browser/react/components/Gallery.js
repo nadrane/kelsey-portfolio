@@ -3,13 +3,17 @@
 import React from "react";
 import infiniteScroll from "../infiniteScroll";
 
-function Gallery({photos}) {
+function Gallery({ photos, openLightbox }) {
   return (
     <div className="gallery">
-      { photos.map(photo => {
-          return <img key={photo.id} src={photo.thumbnailSrc} className="photo" />;
-        })
-      }
+      {photos.map(photo => {
+        return (
+          <img key={photo.id}
+               onClick={openLightbox.bind(null, photo.id)}
+               src={photo.thumbnailSrc}
+               className="photo" />
+        );
+      })}
     </div>
   );
 }

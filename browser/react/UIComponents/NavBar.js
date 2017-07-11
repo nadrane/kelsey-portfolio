@@ -5,7 +5,7 @@ import NavBarLink from './NavBarLink';
 import Button from './Button';
 
 const navBarStyle = {
-  backgroundColor: "rgb(211,211,211)",
+  backgroundColor: "white",
   padding: "0.5rem 0",
 };
 

@@ -4,10 +4,10 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Login from "./Login";
-import Gallery from "./Gallery";
 import UploadPhoto from "./UploadPhoto";
-
+import GalleryAndLightbox from './GalleryAndLightbox';
 import NavBar from "../UIComponents/NavBar";
+
 import { fetchImages, postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";
 
@@ -18,6 +18,8 @@ export default class Main extends React.Component {
       user: {},
       photos: [],
     };
+
+    this.fetchAdditionalPhotos = this.fetchAdditionalPhotos.bind(this);
   }
 
   handleLoginClick(history, e) {
@@ -72,21 +74,22 @@ export default class Main extends React.Component {
       margin: "0 0.5rem 0.5rem 0.5rem",
     };
 
+    const { photos, user } = this.state;
     return (
       <BrowserRouter>
         <div style={wrapperStyle} id="main">
-          <NavBar user={this.state.user}/>
+          <NavBar user={user}/>
           <Switch>
             <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
-              return <Login loginClickHandler={this.handleLoginClick.bind(this, props.history)}/>;
+              const handleLoginClick = this.handleLoginClick.bind(this, props.history);
+              return <Login loginClickHandler={handleLoginClick}/>;
             }}/>
             <Route render={() => {
-              return <Gallery
-                scrollHandler={this.fetchAdditionalPhotos.bind(this)}
-                photos={this.state.photos}
-              />;}}
-            />
+              return <GalleryAndLightbox
+                fetchAdditionalPhotos={this.fetchAdditionalPhotos}
+                photos={photos}/>;
+            }}/>
           </Switch>
         </div>
       </BrowserRouter>

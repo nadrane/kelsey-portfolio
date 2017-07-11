@@ -1,9 +1,9 @@
 import queryString from "query-string";
-import Promise from "bluebird";
+import bluebird from "bluebird";
 
 const fetchJSON = url => {
   const headers = new Headers({ Accept: "application/json" });
-  return Promise.resolve(
+  return bluebird.resolve(
     fetch(url, {
       headers: headers,
       credentials: 'same-origin', // send cookies
@@ -15,7 +15,7 @@ const postJSON = (url, body) => {
   const headers = new Headers();
   headers.set("Accept", "application/json");
   headers.set("Content-Type", "application/json");
-  return Promise.resolve(
+  return bluebird.resolve(
     fetch(url, {
       headers,
       method: "POST",
