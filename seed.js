@@ -4,9 +4,9 @@ const path = require('path');
 const _ = require('lodash');
 const rimraf = require('rimraf');
 
-const env = require("../env");
-const db = require("../server/db/db");
-const {Image, User, Tag} = require("../server/db/models");
+const env = require("./env");
+const db = require("./server/db/db");
+const {Image, User, Tag} = require("./server/db/models");
 const argv = require('minimist')(process.argv.slice(2));
 
 

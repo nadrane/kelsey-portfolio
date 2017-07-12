@@ -9,5 +9,5 @@ module.exports = {
     PUBLIC_DIR,
     BIN_DIR,
     NODE_MODULES,
-    SEED_IMAGES: path.join(ROOT, 'seed', 'seedImages'),
+    SEED_IMAGES: path.join(ROOT, 'assets', 'seed-images'),
 };
