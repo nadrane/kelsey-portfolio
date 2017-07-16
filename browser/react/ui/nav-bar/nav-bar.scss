@@ -23,7 +23,7 @@ a {
     content: '•';
   }
 
-  &last-child::after {
+  &:last-child::after {
     padding-left: 0;
     content: '';
   }

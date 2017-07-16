@@ -7,6 +7,7 @@ import Login from "./login";
 import UploadPhoto from "./upload-photo";
 import GalleryAndLightbox from './GalleryAndLightbox';
 import NavBar from "../ui/nav-bar";
+import Alert from "../ui/alert";
 
 import { fetchImages, postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";

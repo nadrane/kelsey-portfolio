@@ -1,0 +1,7 @@
+:local(.leave) {
+  opacity: 1;
+}
+:local(.leaveActive) {
+  opacity: 0.01;
+  transition: opacity 500ms ease-out;
+}

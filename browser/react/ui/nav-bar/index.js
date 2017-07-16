@@ -17,7 +17,7 @@ function NavBar({user}) {
           <Link className={link} to="/">Photos</Link>
           <Link className={link} to="/about">About Me</Link>
           <Link className={link} to="/contact">Contact</Link>
-          { user.isAdmin ? <Link to="/upload">Manage Photos</Link> : null }
+          { user.isAdmin ? <Link className={link} to="/upload">Manage Photos</Link> : null }
         </div>
       </div>
     </nav>
