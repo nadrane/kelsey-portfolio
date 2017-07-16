@@ -72,7 +72,7 @@ export default class UploadPhoto extends React.Component {
         message: "",
         type: ""
       });
-    }, 500000);
+    }, 5000);
   }
 
   handleSubmit(e) {
