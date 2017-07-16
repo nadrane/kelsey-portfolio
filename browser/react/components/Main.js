@@ -4,7 +4,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Login from "./login";
-import UploadPhoto from "./UploadPhoto";
+import UploadPhoto from "./upload-photo";
 import GalleryAndLightbox from './GalleryAndLightbox';
 import NavBar from "../ui/nav-bar";
 

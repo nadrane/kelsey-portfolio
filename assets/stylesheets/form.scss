@@ -13,8 +13,18 @@ form {
     }
   }
 
-   input {
+  /* hide the ugly default file https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+  */
+  input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
 
+  input {
     &:focus {
       outline: none;
       border: 1px solid #DDDDDD;

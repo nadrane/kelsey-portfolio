@@ -1,7 +1,11 @@
 "use strict";
 
 import React from "react";
-import { postJSON } from "../../http";
+import { postJSON } from "../../../http";
+
+import { fileInputLabel } from "./upload-photo.scss";
+import "button.scss";
+import "form.scss";
 
 export default class UploadPhoto extends React.Component {
   constructor(props) {
@@ -32,47 +36,23 @@ export default class UploadPhoto extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    postJSON(
-      "/api/images",
-      {data: this.state.photo}
-    );
+    postJSON("/api/images", { data: this.state.photo });
   }
 
   render() {
-    const formStyle = {
-      marginLeft: "auto",
-      marginRight: "auto",
-      width: "30rem"
-    };
-
-    const previewImageStyle = {
-      marginTop: "1rem",
-      maxWidth: "100%"
-    };
-
-    const inputStyle = {
-      display: "inline-block"
-    };
-
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        style={formStyle}
-        className="pure-form pure-form-stacked"
-      >
+      <form onSubmit={this.handleSubmit}>
         <fieldset>
-          <legend>Select a Photo</legend>
+          <label className={fileInputLabel} htmlFor="photo-uploader">Upload photo</label>
           <input
-            style={inputStyle}
+            id="photo-uploader"
             onChange={this.uploadHandler}
             name="photo"
             type="file"
             accept="image/*"
           />
-          <button type="submit" className="pure-button pure-button-primary">
-            Confirm Photo
-          </button>
-          <img style={previewImageStyle} src={this.state.photo} />
+          <button type="submit">Confirm Photo</button>
+          <img src={this.state.photo} />
         </fieldset>
       </form>
     );
