@@ -4,9 +4,11 @@
   "description": "A generated project at Fullstack Academy",
   "main": "server/main.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development yarn start",
+    "start:dev": "NODE_ENV=development yarn build-js",
     "start:prod": "NODE_ENV=production yarn start",
-    "start": "webpack -w & node-sass -w assets/stylesheets/ -o public/stylesheets & nodemon --watch server -e js,html server/main.js",
+    "start": "yarn build-js & yarn start-server",
+    "start-server": "nodemon server/main.js --watch server -e js,html",
+    "build-js": "webpack -w",
     "test": "./node_modules/.bin/mocha server/**/*.test.js --reporter spec",
     "seed": "NODE_ENV=development node seed.js"
   },
@@ -23,7 +25,6 @@
     "nodemon": "^1.3.7",
     "parse-data-url": "^0.1.4",
     "pg": "^6.1.0",
-    "purecss": "^1.0.0",
     "query-string": "^4.3.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -42,7 +43,8 @@
     "minimist": "^1.2.0",
     "node-sass": "^4.5.3",
     "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^2.2.1"
+    "webpack": "^2.7.0"
   }
 }

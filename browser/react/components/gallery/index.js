@@ -1,11 +1,12 @@
 "use strict";
 
 import React from "react";
-import infiniteScroll from "../infiniteScroll";
+
+import {gallery} from './gallery.scss';
 
 function Gallery({ photos, openLightbox }) {
   return (
-    <div className="gallery">
+    <div className={gallery}>
       {photos.map(photo => {
         return (
           <img key={photo.id}
@@ -17,4 +18,4 @@ function Gallery({ photos, openLightbox }) {
     </div>
   );
 }
-export default infiniteScroll(300)(Gallery);
+export default Gallery;

@@ -3,10 +3,10 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Login from "./Login";
+import Login from "./login";
 import UploadPhoto from "./UploadPhoto";
 import GalleryAndLightbox from './GalleryAndLightbox';
-import NavBar from "../UIComponents/NavBar";
+import NavBar from "../ui/nav-bar";
 
 import { fetchImages, postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";
@@ -70,15 +70,10 @@ export default class Main extends React.Component {
   }
 
   render() {
-    const wrapperStyle = {
-      margin: "0 0.5rem 0.5rem 0.5rem",
-    };
-
     const { photos, user } = this.state;
     return (
       <BrowserRouter>
-        <div style={wrapperStyle} id="main">
-          <NavBar user={user}/>
+        <div id="main">
           <Switch>
             <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
@@ -86,9 +81,14 @@ export default class Main extends React.Component {
               return <Login loginClickHandler={handleLoginClick}/>;
             }}/>
             <Route render={() => {
-              return <GalleryAndLightbox
-                fetchAdditionalPhotos={this.fetchAdditionalPhotos}
-                photos={photos}/>;
+              return (
+                <div>
+                  <NavBar user={user}/>
+                  <GalleryAndLightbox
+                    fetchAdditionalPhotos={this.fetchAdditionalPhotos}
+                    photos={photos}/>
+                </div>
+              );
             }}/>
           </Switch>
         </div>

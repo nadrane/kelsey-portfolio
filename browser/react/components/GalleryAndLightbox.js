@@ -1,7 +1,10 @@
 import React from "react";
-import Gallery from "./Gallery";
+import Gallery from "./gallery";
 import Lightbox from "react-image-lightbox";
+import infiniteScroll from "../infiniteScroll";
 import _ from "lodash";
+
+const ScrollingGallery = infiniteScroll(300)(Gallery);
 
 export default class GalleryAndLightbox extends React.Component {
   constructor(props) {
@@ -69,7 +72,7 @@ export default class GalleryAndLightbox extends React.Component {
     const { isLightboxOpen } = this.state;
     return (
       <div>
-        <Gallery
+        <ScrollingGallery
           openLightbox={this.openLightbox}
           scrollHandler={fetchAdditionalPhotos}
           photos={photos}

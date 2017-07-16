@@ -10,7 +10,6 @@ const env = require("../../env");
 app.use(morgan("dev"));
 
 app.use(express.static(env.PUBLIC_DIR));
-app.use(express.static(path.join(env.NODE_MODULES, 'purecss/build/')));
 app.use(bodyParser.json({limit: 1000000000})); //Find an appropriate size for me :) TODO
 
 app.use(require("./middleware/pagination"));

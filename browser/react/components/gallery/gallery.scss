@@ -1,0 +1,30 @@
+:local(.gallery) {
+  column-count: 3;
+  column-gap: 0;
+
+  img {
+    break-inside: avoid;
+    display: block;
+    max-width: 100%;
+    padding: .125rem;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 620px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .gallery {
+    column-count: 3;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .gallery {
+    column-count: 4;
+  }
+}
