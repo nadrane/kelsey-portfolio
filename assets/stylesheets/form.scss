@@ -42,6 +42,26 @@ form {
       font-size: 12px;
     }
   }
+
+  textarea {
+    &:focus {
+      outline: none;
+      border: 1px solid #DDDDDD;
+    }
+
+    width: 100%;
+    color: #464a4c;
+    font-size: 1rem;
+    padding: .5rem .75rem;
+    border: 1px solid rgba(0,0,0,.20);
+    margin: .2rem;
+    border-radius: 10px;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, .5);
+      font-size: 12px;
+    }
+  }
 }
 
 fieldset {

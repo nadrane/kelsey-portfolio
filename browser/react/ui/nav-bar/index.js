@@ -8,10 +8,10 @@ import {link, brand, header, headerWrapper, headshot, headshotWrapper} from './n
 function NavBar({user}) {
   return (
     <nav>
-      <Link id={brand} to="/">Kelsey Hagen</Link>
       <div id={headshotWrapper}>
         <img id={headshot} src="images/headshot.jpg" />
       </div>
+      <Link id={brand} to="/">Kelsey Hagen</Link>
       <div id={headerWrapper}>
         <div id={header}>
           <Link className={link} to="/">Photos</Link>

@@ -1,6 +1,7 @@
 :local(.success) {
   font-size: .8rem;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 14rem;
   padding: 7px;
   background-color: #4CAF50;
   color: white;
@@ -11,7 +12,8 @@
 
 :local(.error) {
   font-size: .8rem;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 14rem;
   padding: 7px;
   background-color: #f44336;
   color: white;

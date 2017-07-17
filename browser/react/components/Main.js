@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Login from "./login";
 import UploadPhoto from "./upload-photo";
+import Contact from "./contact";
 import GalleryAndLightbox from './GalleryAndLightbox';
 import NavBar from "../ui/nav-bar";
 import Alert from "../ui/alert";
@@ -76,6 +77,7 @@ export default class Main extends React.Component {
       <BrowserRouter>
         <div id="main">
           <Switch>
+             <Route path="/contact" component={Contact} />
             <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
               const handleLoginClick = this.handleLoginClick.bind(this, props.history);
