@@ -1,14 +1,18 @@
 :local(.gallery) {
   column-count: 3;
   column-gap: 0;
+}
 
-  img {
-    break-inside: avoid;
-    display: block;
-    max-width: 100%;
-    padding: .125rem;
-    cursor: pointer;
-  }
+:local(.image) {
+  display: block;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+:local(.photoWrapper) {
+  width: 100%;
+  break-inside: avoid;
+  padding: .075rem;
 }
 
 @media screen and (min-width: 620px) {

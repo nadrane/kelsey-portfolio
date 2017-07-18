@@ -2,17 +2,20 @@
 
 import React from "react";
 
-import {gallery} from './gallery.scss';
+import { gallery, image, photoWrapper } from "./gallery.scss";
 
 function Gallery({ photos, openLightbox }) {
   return (
     <div className={gallery}>
       {photos.map(photo => {
         return (
-          <img key={photo.id}
-               onClick={openLightbox.bind(null, photo.id)}
-               src={photo.thumbnailSrc}
-               className="photo" />
+          <div key={photo.id} className={photoWrapper}>
+            <img
+              className={image}
+              onClick={openLightbox.bind(null, photo.id)}
+              src={photo.thumbnailSrc}
+            />
+          </div>
         );
       })}
     </div>
