@@ -1,13 +1,12 @@
 "use strict";
 
-const express = require("express");
-const router = module.exports = new express.Router();
+const router = module.exports = require("express").Router();
 const bcrypt = require('bcryptjs');
-const { User } = require('../../db/models');
-const { AuthorizationError } = require('../errors');
+const { User } = require('../../../db/models');
+const { AuthorizationError } = require('../../errors');
 
-router.get('/me', (req, res, next) => {
-  res.send(req.session.user);
+router.get('/me', (req, res) => {
+  res.send(req.user);
 });
 
 router.post('/login', (req, res, next) => {
@@ -21,7 +20,8 @@ router.post('/login', (req, res, next) => {
       return bcrypt.compare(req.body.password, user.hash)
         .then(passwordsAreSame => {
           if (passwordsAreSame) {
-            req.session.userId = user.id;
+            console.log('user', user)
+            req.user = user.id
             res.send(user);
           } else {
             next(new AuthorizationError('Invalid email or password'));

@@ -1,8 +1,7 @@
 "use strict";
 
-const express = require("express");
-const router = module.exports = new express.Router();
-const { Image } = require("../../db/models");
+const router = module.exports = require("express").Router();
+const { Image } = require("../../../db/models");
 
 router.get("/", function(req, res, next) {
   req.query.tag

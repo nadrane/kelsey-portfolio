@@ -16,7 +16,7 @@ app.use(require("./middleware/pagination"));
 app.use(require("./middleware/session-middleware"));
 app.use(require("./middleware/strip-data-urls"));
 
-app.use("/api", require("./routes"));
+app.use(require("./routes"));
 
 app.get("/*", function(req, res) {
   res.sendFile(path.resolve(__dirname, "..", "..", "browser/index.html"));

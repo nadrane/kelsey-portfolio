@@ -95,7 +95,7 @@ module.exports = (db, ImageVersion) => {
     let PILImage = await createPILImage(image.data);
     await PILImage.resize(maxWidth, maxHeight);
     [imageVersion, PILImage] = await bluebird.join(makeImageVersion(PILImage), PILImage.compress());
-    await PILImage.save(path.join(env.PUBLIC_DIR, 'images'));
+    await PILImage.save(path.join(env.PUBLIC_DIR, 'api-images'));
     return imageVersion;
   }
 

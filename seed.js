@@ -29,8 +29,8 @@ function seedTable(tableName, cb) {
 }
 
 function createImages() {
-  rimraf.sync(path.join(env.PUBLIC_DIR, 'images'));
-  fs.mkdirSync(path.join(env.PUBLIC_DIR, 'images'));
+  rimraf.sync(path.join(env.PUBLIC_DIR, 'api-images'));
+  fs.mkdirSync(path.join(env.PUBLIC_DIR, 'api-images'));
   return fs.readdirAsync(env.SEED_IMAGES)
     .then(images => images.filter(path => !path.startsWith('.')))
     .then(images => images.filter((_, i) => i < (argv.n || Infinity)))

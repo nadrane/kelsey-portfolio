@@ -28,7 +28,7 @@ export default class Main extends React.Component {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    postJSON('/api/auth/login', {email, password})
+    postJSON('/services/auth/login', {email, password})
     .then(user => {
       this.setState({user});
       history.push('/');
@@ -37,7 +37,7 @@ export default class Main extends React.Component {
   }
 
   getLoggedInUser() {
-    return fetchJSON('/api/auth/me')
+    return fetchJSON('/services/auth/me')
       .then(user => {
         this.setState({user});
       })
@@ -46,7 +46,7 @@ export default class Main extends React.Component {
 
   componentDidMount() {
     return Promise.all([this.fetchAdditionalPhotos(), this.getLoggedInUser()])
-      .catch(console.error.bind(console));
+      .catch(logError);
 
   }
 

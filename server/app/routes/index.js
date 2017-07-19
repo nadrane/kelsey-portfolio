@@ -1,5 +1,4 @@
-const express = require('express');
-const router = module.exports = express.Router();
+const router = (module.exports = require("express").Router());
 
-router.use('/images', require('./image'));
-router.use('/auth', require('./auth'));
+router.use('/api', require("./api"));
+router.use('/services', require("./services"));

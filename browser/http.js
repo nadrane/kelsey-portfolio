@@ -30,7 +30,7 @@ const parseResponse = function(response) {
   if (contentType && contentType.indexOf("application/json") !== -1) {
     return response.json();
   } else {
-    throw new Error("Failed to retrieve JSON from server");
+    return response;
   }
 };
 
