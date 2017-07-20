@@ -1,12 +1,20 @@
 "use strict";
 
-const router = (module.exports = require("express").Router());
-const jwt = require("express-jwt");
+const express = require("express");
+const router = (module.exports = new express.Router());
+const cookieSession = require("cookie-session");
 const { SECRET } = require("../../../env/index");
 
 router.use(
-  jwt({
+  cookieSession({
+    name: 'data',
     secret: SECRET,
-    credentialsRequired: false
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      //domain: 'example.com',
+      //path: 'foo/bar',
+      //expires: expiryDate
+    }
   })
 );

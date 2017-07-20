@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import {link, brand, header, headerWrapper, headshot, headshotWrapper} from './nav-bar.scss';
+import {link, brand, header, headerWrapper, headshot, headshotWrapper} from './header.scss';
 
 function NavBar({user}) {
   return (

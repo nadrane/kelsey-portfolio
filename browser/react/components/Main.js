@@ -7,7 +7,7 @@ import Login from "./login";
 import UploadPhoto from "./upload-photo";
 import Contact from "./contact";
 import GalleryAndLightbox from './GalleryAndLightbox';
-import NavBar from "../ui/nav-bar";
+import Header from "../ui/header";
 import Alert from "../ui/alert";
 
 import { fetchImages, postJSON, fetchJSON } from "../../http";
@@ -86,7 +86,7 @@ export default class Main extends React.Component {
             <Route render={() => {
               return (
                 <div>
-                  <NavBar user={user}/>
+                  <Header user={user}/>
                   <GalleryAndLightbox
                     fetchAdditionalPhotos={this.fetchAdditionalPhotos}
                     photos={photos}/>

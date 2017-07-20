@@ -6,7 +6,7 @@ const { User } = require('../../../db/models');
 const { AuthorizationError } = require('../../errors');
 
 router.get('/me', (req, res) => {
-  res.send(req.user);
+  res.send(req.session);
 });
 
 router.post('/login', (req, res, next) => {
@@ -20,8 +20,7 @@ router.post('/login', (req, res, next) => {
       return bcrypt.compare(req.body.password, user.hash)
         .then(passwordsAreSame => {
           if (passwordsAreSame) {
-            console.log('user', user)
-            req.user = user.id
+            req.session = user.toJSON();
             res.send(user);
           } else {
             next(new AuthorizationError('Invalid email or password'));
