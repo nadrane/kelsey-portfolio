@@ -3,6 +3,7 @@
 import React from "react";
 
 import { gallery, image, photoWrapper } from "./gallery.scss";
+import Gallery from 'react-photo-gallery';
 
 function Gallery({ photos, openLightbox }) {
   return (

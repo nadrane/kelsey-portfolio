@@ -1,18 +1,6 @@
 :local(.fileInputLabel) {
-  font-size: .6rem;
-  text-transform: uppercase;
   display: block;
-  background-color: white;
   width: 100%;
-  color: #464a4c;
-  padding: .5rem .75rem;
-  border: 1px solid rgba(0,0,0,.20);
-  border-radius: 10px;
-  text-align: center;
-
-  &:hover {
-    cursor: pointer
-  }
 }
 
 :local(.uploadedPreview) {
