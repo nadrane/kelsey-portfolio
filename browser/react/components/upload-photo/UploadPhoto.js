@@ -2,9 +2,10 @@
 
 import React from "react";
 import { postJSON } from "../../../http";
+import composeClasses from "../../../composeClasses";
 
 import { fileInputLabel, uploadedPreview } from "./upload-photo.scss";
-import "button.scss";
+import { btnPrimary, btnSecondary } from "button.scss";
 import "form.scss";
 import "global.scss";
 
@@ -13,7 +14,7 @@ export default class UploadPhoto extends React.Component {
     super(props);
 
     this.state = {
-      photo: null,
+      photo: null
     };
 
     this.uploadHandler = this.uploadHandler.bind(this);
@@ -64,7 +65,10 @@ export default class UploadPhoto extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <fieldset>
-          <label className={fileInputLabel} htmlFor="photo-uploader">
+          <label
+            className={composeClasses(fileInputLabel, btnSecondary)}
+            htmlFor="photo-uploader"
+          >
             Upload photo
           </label>
           <input
@@ -75,7 +79,9 @@ export default class UploadPhoto extends React.Component {
             accept="image/*"
           />
           {photo ? <img className={uploadedPreview} src={photo} /> : null}
-          <button type="submit">Confirm Photo</button>
+          <button className={btnPrimary} type="submit">
+            Confirm Photo
+          </button>
         </fieldset>
       </form>
     );

@@ -5,7 +5,7 @@ import React from "react";
 import './login.scss';
 import 'form.scss';
 import 'global.scss';
-import 'button.scss';
+import { btnPrimary } from 'button.scss';
 
 export default function Login({ loginClickHandler }) {
   return (
@@ -17,7 +17,7 @@ export default function Login({ loginClickHandler }) {
         <div>
           <input name="password" type="password" placeholder="password" />
         </div>
-        <button type="submit">Login</button>
+        <button className={btnPrimary} type="submit">Login</button>
       </fieldset>
     </form>
   );

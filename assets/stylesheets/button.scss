@@ -1,9 +1,34 @@
-button {
-  color: white;
+@import 'colors';
+
+:local(.btn) {
+  text-align: center;
   font-size: .6rem;
-  background-color: #32c06a;
   text-transform: uppercase;
   border-radius: 10px;
   border: 1px solid rgba(0,0,0,.20);
   padding: .5rem .75rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+:local(.btnPrimary) {
+  composes: btn;
+  color: $primaryButtonColor;
+  background-color: $primaryButton;
+
+  &:hover {
+    background-color: $primaryButtonHover;
+  }
+}
+
+:local(.btnSecondary) {
+  composes: btn;
+  color: $secondaryButtonColor;
+  background-color: $secondaryButtonBG;
+
+  &:hover {
+    background-color: $secondaryButtonHoverBG;
+  }
 }
