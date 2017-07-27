@@ -12,7 +12,7 @@ export default class Gallery extends React.Component {
     this.state = {
       numberOfColumns: 0
     };
-    this.handleResize = debounce(this.handleResize.bind(this), 100, {
+    this.handleResize = debounce(this.handleResize.bind(this), 50, {
       leading: true
     });
   }
@@ -79,7 +79,7 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    const gutter = this.props.gutter || 10;
+    const gutter = this.props.gutter || 2;
     const columnWidth = this.props.columnWidth || 400;
     const photos = this.props.photos;
     const numberOfColumns = this.state.numberOfColumns;

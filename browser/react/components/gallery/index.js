@@ -47,7 +47,7 @@ export default class StatefulGallery extends React.Component {
     const clickHandler = this.props.clickHandler;
     return (
       <ScrollingGallery
-        columnWidth={333}
+        columnWidth={400}
         clickHandler={clickHandler}
         scrollHandler={this.fetchAdditionalPhotos.bind(this)}
         photos={photos}
