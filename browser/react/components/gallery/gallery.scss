@@ -1,6 +1,7 @@
 :local(.gallery) {
-  column-count: 3;
-  column-gap: 0;
+  position: relative; // So that the images in the gallery can be positioned absolutely: em;
+    margin-left: auto;
+  margin-right: auto;
 }
 
 :local(.image) {
@@ -11,24 +12,6 @@
 
 :local(.photoWrapper) {
   width: 100%;
-  break-inside: avoid;
   padding: .075rem;
 }
 
-@media screen and (min-width: 620px) {
-  .gallery {
-    column-count: 2;
-  }
-}
-
-@media screen and (min-width: 1050px) {
-  .gallery {
-    column-count: 3;
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .gallery {
-    column-count: 4;
-  }
-}
