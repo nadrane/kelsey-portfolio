@@ -52,7 +52,7 @@ export default class Main extends React.Component {
       <BrowserRouter>
         <div id="main">
           <Switch>
-             <Route path="/contact" component={Contact} />
+            <Route path="/contact" component={Contact} />
             <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
               const handleLoginClick = this.handleLoginClick.bind(this, props.history);

@@ -8,46 +8,95 @@ import { gallery, image, photoWrapper } from "./gallery.scss";
 export default class Gallery extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      numberOfColumns: 0
+      galleryWidth: 0
     };
-    this.handleResize = debounce(this.handleResize.bind(this), 50, {
-      leading: true
-    });
+    this.handleResize = this.handleResize.bind(this);
+    // this.handleResize = debounce(this.handleResize.bind(this), 50, {
+    //   leading: true
+    // });
   }
 
   componentDidMount() {
+    console.log('mounting')
     this.setState({
-      numberOfColumns: this.getNumberOfColumns(this.props.columnWidth)
+      galleryWidth: this._galleryDiv.clientWidth
     });
+
     window.addEventListener("resize", this.handleResize);
   }
 
   componentWillUnmount() {
+    console.log('unmounting')
+  }
+
+  componentWillUnmount() {
+    console.log("resizing");
     window.removeEventListener("resize", this.handleResize);
   }
 
   handleResize() {
-    console.log("resizing");
     this.setState({
-      numberOfColumns: this.getNumberOfColumns(this.props.columnWidth)
+      galleryWidth: this._galleryDiv.clientWidth
     });
   }
 
   componentWillUpdate() {}
 
-  getNumberOfColumns(columnWidth) {
-    console.log("client width", this._galleryDiv.clientWidth);
-    console.log(
-      "col count",
-      Math.floor(this._galleryDiv.clientWidth / columnWidth)
-    );
-    return Math.floor(this._galleryDiv.clientWidth / columnWidth);
+  getColumnWidth(columnMinWidth, columnMaxWidth, gutter, idealMargin) {
+    const { galleryWidth } = this.state;
+    const errorInMarginTolerance = 10;
+    const numberOfColumns = this.getNumberOfColumns((columnMaxWidth + columnMinWidth) / 2, gutter, idealMargin);
+
+    const computeMargin = columnWidth => galleryWidth - this.computeWidth(numberOfColumns, columnWidth, gutter);
+    const nearby = (value1, value2) => Math.abs(value1 - value2) < errorInMarginTolerance;
+    const distanceFromIdeal = column => Math.abs(column.margin - idealMargin);
+    const bestMargin = (column1, column2) =>
+      distanceFromIdeal(column1) > distanceFromIdeal(column2) ? column2 : column1;
+
+    // TODO we can easily reduce this from O(N) to log(N) with a binary search of some sort
+    // +1 is necessary because the range function's maximum is not inclusive
+    const calculatedColumnWidth = range(columnMinWidth, columnMaxWidth + 1).reduce(
+      (bestColumnWidth, columnWidth) => {
+        const margin = computeMargin(columnWidth);
+        return margin > 0 ? bestMargin({ columnWidth, margin }, bestColumnWidth) : bestColumnWidth;
+      },
+      {
+        margin: Infinity,
+        columnWidth: (columnMinWidth + columnMaxWidth) / 2
+      }
+    ).columnWidth;
+
+    if (!nearby(idealMargin, computeMargin(calculatedColumnWidth))) {
+      console.warn(
+        `Warning: Could not caclulate a column width that creates a margin equal to your idealMargin+/-10px (${idealMargin - 10}px - ${idealMargin + 10}px). Please increase the range between columnMinWidth and columnMaxWidth. Generally increasing the columnMaxWidth helps.`
+      );
+    }
+    return calculatedColumnWidth;
+  }
+
+  getColumnRange(columnMinWidth, columnMaxWidth) {
+    return range(this.getNumberOfColumns(columnMinWidth), this.getNumberOfColumns(columnMaxWidth));
+  }
+
+  getNumberOfColumns(columnWidth, gutter, margin) {
+    const { galleryWidth } = this.state;
+
+    // Sometimes when the DOM is initializing, the width of the element will be 0
+    if (galleryWidth === 0) return 1;
+
+    margin *= 2;
+    const numberOfColumns = Math.floor((galleryWidth - margin) / (columnWidth + gutter));
+
+    /* Because we round down, it's possible to have a zero columns acording to the above calculation. Obviously this is ridiculous. Remember that we calculate the number of columns
+    using the maximum column width! This means that although for the maximum width, a single
+    column might be too large, there still might (not really might but better be otherwise we need a wider column range) be a a column width within range that allows a single column to fit.
+    */
+    return numberOfColumns <= 0 ? 1 : numberOfColumns;
   }
 
   initializeColumnMinimums(numberOfColumns) {
-    return range(numberOfColumns).map(_ => 0);
+    return new Array(numberOfColumns).fill(0);
   }
 
   getPhotoOffsetOfNextPhoto(columnMinimums, columnWidth, gutter) {
@@ -63,44 +112,38 @@ export default class Gallery extends React.Component {
   }
 
   findMaxColumnHeight(columnMinimums) {
+    if (columnMinimums.length === 0) return 0;
     return Math.max(...columnMinimums);
   }
 
   updateColumnMiniums(photo, scalingFactor, gutter, columnMinimums) {
     const minimumColumnIndex = this.findMinimumColumnIndex(columnMinimums);
-    columnMinimums[minimumColumnIndex] += Math.round(
-      photo.thumbnailHeight * scalingFactor + gutter
-    );
+    columnMinimums[minimumColumnIndex] += Math.round(photo.thumbnailHeight * scalingFactor + gutter);
     return columnMinimums;
   }
 
   computeWidth(numberOfColumns, columnWidth, gutter) {
+    if (numberOfColumns === 0) return 0;
     return numberOfColumns * columnWidth + (numberOfColumns - 1) * gutter;
   }
 
   render() {
-    const gutter = this.props.gutter || 2;
-    const columnWidth = this.props.columnWidth || 400;
-    const photos = this.props.photos;
-    const numberOfColumns = this.state.numberOfColumns;
-    const clickHandler = this.props.clickHandler;
+    const gutter = this.props.gutter || 10;
+    const columnMinWidth = this.props.columnMinWidth || 100;
+    const columnMaxWidth = this.props.columnMaxWidth || 300;
+    const idealMargin = this.props.idealMargin || 20;
+    const { photos, clickHandler } = this.props;
+
+    const numberOfColumns = this.getNumberOfColumns((columnMaxWidth + columnMinWidth) / 2, gutter, idealMargin);
+
+    const columnWidth = this.getColumnWidth(columnMinWidth, columnMaxWidth, gutter, idealMargin);
     let columnMinimums = this.initializeColumnMinimums(numberOfColumns);
 
     const imgJSX = photos.map(photoToPlace => {
       let scalingFactor = columnWidth / photoToPlace.thumbnailWidth;
-      const offset = this.getPhotoOffsetOfNextPhoto(
-        columnMinimums,
-        columnWidth,
-        gutter
-      );
+      const offset = this.getPhotoOffsetOfNextPhoto(columnMinimums, columnWidth, gutter);
 
-      columnMinimums = this.updateColumnMiniums(
-        photoToPlace,
-        scalingFactor,
-        gutter,
-        columnMinimums
-      );
-      //console.log("cols", columnMinimums);
+      columnMinimums = this.updateColumnMiniums(photoToPlace, scalingFactor, gutter, columnMinimums);
       const style = {
         transform: `translateX(${offset.x}px) translateY(${offset.y}px)`,
         position: "absolute",
@@ -110,11 +153,7 @@ export default class Gallery extends React.Component {
       };
       return (
         <div key={photoToPlace.id} className={photoWrapper} style={style}>
-          <img
-            className={image}
-            onClick={e => clickHandler(e, photoToPlace.id)}
-            src={photoToPlace.thumbnailSrc}
-          />
+          <img className={image} onClick={e => clickHandler(e, photoToPlace)} src={photoToPlace.thumbnailSrc} />
         </div>
       );
     });

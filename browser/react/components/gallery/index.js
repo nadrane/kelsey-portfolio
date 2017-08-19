@@ -42,14 +42,27 @@ export default class StatefulGallery extends React.Component {
   }
 
   render() {
-    const ScrollingGallery = infiniteScroll(300)(Gallery);
+    //const ScrollingGallery = infiniteScroll(300)(Gallery);
     const photos = this.state.photos;
     const clickHandler = this.props.clickHandler;
+    // return (
+    //   <ScrollingGallery
+    //     columnMinWidth={100}
+    //     columnMaxWidth={250}
+    //     gutter={10}
+    //     idealMargin={20}
+    //     clickHandler={clickHandler}
+    //     scrollHandler={this.fetchAdditionalPhotos.bind(this)}
+    //     photos={photos}
+    //   />
+    // );
     return (
-      <ScrollingGallery
-        columnWidth={400}
+      <Gallery
+        columnMinWidth={150}
+        columnMaxWidth={300}
+        gutter={3}
+        idealMargin={20}
         clickHandler={clickHandler}
-        scrollHandler={this.fetchAdditionalPhotos.bind(this)}
         photos={photos}
       />
     );
