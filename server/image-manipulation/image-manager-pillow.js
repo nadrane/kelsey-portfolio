@@ -17,8 +17,8 @@ const PILImage = {
 
     calculateAndSetDimensions: async function() {
       const dimensions = await calculateDimensions(this.buffer);
-      this.width = dimensions.height;
-      this.height = dimensions.width;
+      this.width = dimensions.width;
+      this.height = dimensions.height;
     },
 
     save: async function(outputDir) {

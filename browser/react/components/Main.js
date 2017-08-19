@@ -10,7 +10,7 @@ import GalleryAndLightbox from './GalleryAndLightbox';
 import Header from "../ui/header";
 import Alert from "../ui/alert";
 
-import { fetchImages, postJSON, fetchJSON } from "../../http";
+import { postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";
 
 export default class Main extends React.Component {
@@ -18,10 +18,7 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       user: {},
-      photos: [],
     };
-
-    this.fetchAdditionalPhotos = this.fetchAdditionalPhotos.bind(this);
   }
 
   handleLoginClick(history, e) {
@@ -45,30 +42,8 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    return Promise.all([this.fetchAdditionalPhotos(), this.getLoggedInUser()])
+    return this.getLoggedInUser()
       .catch(logError);
-
-  }
-
-  fetchAdditionalPhotos() {
-    return fetchImages().then(photos => {
-      if (photos.length === 0) return;  // No additional photos from server
-      this.setState(prevState => {
-        return { photos: [...prevState.photos, ...this.formatPhotos(photos)] };
-      });
-    });
-  }
-
-  formatPhotos(photos) {
-    return photos.map(photo => {
-      return {
-        id: photo.id,
-        gallerySrc: 'images/' + photo.gallery.fileName,
-        thumbnailSrc: 'images/' + photo.thumbnail.fileName,
-        thumbnailWidth: photo.thumbnail.width,
-        thumbnailHeight: photo.thumbnail.height
-      };
-    });
   }
 
   render() {
@@ -77,7 +52,7 @@ export default class Main extends React.Component {
       <BrowserRouter>
         <div id="main">
           <Switch>
-             <Route path="/contact" component={Contact} />
+            <Route path="/contact" component={Contact} />
             <Route path="/upload" component={UploadPhoto} />
             <Route path="/login" render={(props) => {
               const handleLoginClick = this.handleLoginClick.bind(this, props.history);
@@ -87,9 +62,7 @@ export default class Main extends React.Component {
               return (
                 <div>
                   <Header user={user}/>
-                  <GalleryAndLightbox
-                    fetchAdditionalPhotos={this.fetchAdditionalPhotos}
-                    photos={photos}/>
+                  <GalleryAndLightbox />
                 </div>
               );
             }}/>
