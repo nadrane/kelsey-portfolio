@@ -5,6 +5,10 @@ import { fetchImages } from "../../../http";
 import Gallery from "./gallery";
 import infiniteScroll from "../../infiniteScroll";
 
+// This must occur outside the render function so that the reference to the new component remains constant:
+//https://facebook.github.io/react/docs/higher-order-components.html#dont-use-hocs-inside-the-render-method
+const ScrollingGallery = infiniteScroll(300)(Gallery);
+
 export default class StatefulGallery extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +33,7 @@ export default class StatefulGallery extends React.Component {
     });
   }
 
+
   formatPhotos(photos) {
     return photos.map(photo => {
       return {
@@ -42,27 +47,17 @@ export default class StatefulGallery extends React.Component {
   }
 
   render() {
-    //const ScrollingGallery = infiniteScroll(300)(Gallery);
-    const photos = this.state.photos;
-    const clickHandler = this.props.clickHandler;
-    // return (
-    //   <ScrollingGallery
-    //     columnMinWidth={100}
-    //     columnMaxWidth={250}
-    //     gutter={10}
-    //     idealMargin={20}
-    //     clickHandler={clickHandler}
-    //     scrollHandler={this.fetchAdditionalPhotos.bind(this)}
-    //     photos={photos}
-    //   />
-    // );
+    const { photos } = this.state;
+    const { clickHandler } = this.props;
+
     return (
-      <Gallery
+      <ScrollingGallery
         columnMinWidth={150}
         columnMaxWidth={300}
         gutter={3}
-        idealMargin={20}
+        idealMargin={10}
         clickHandler={clickHandler}
+        scrollHandler={this.fetchAdditionalPhotos.bind(this)}
         photos={photos}
       />
     );

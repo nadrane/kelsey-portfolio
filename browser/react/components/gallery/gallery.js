@@ -32,8 +32,6 @@ export default class Gallery extends React.Component {
     });
   }
 
-  componentWillUpdate() {}
-
   getColumnWidth(columnMinWidth, gutter, idealMargin) {
     const { galleryWidth } = this.state;
     const numberOfColumns = this.getNumberOfColumns(columnMinWidth, gutter, idealMargin);

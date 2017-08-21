@@ -1,7 +1,6 @@
 import React from "react";
 import Gallery from "./gallery";
 import Lightbox from "react-image-lightbox";
-import infiniteScroll from "../infiniteScroll";
 import _ from "lodash";
 
 export default class GalleryAndLightbox extends React.Component {
@@ -20,15 +19,13 @@ export default class GalleryAndLightbox extends React.Component {
 
   incrementIndex() {
     const photosLength = this.props.photos.length;
-    const newIndex =
-      (this.state.currentPhotoIndex + photosLength + 1) % photosLength;
+    const newIndex = (this.state.currentPhotoIndex + photosLength + 1) % photosLength;
     this.setState({ currentPhotoIndex: newIndex });
   }
 
   decrementIndex() {
     const photosLength = this.props.photos.length;
-    const newIndex =
-      (this.state.currentPhotoIndex + photosLength - 1) % photosLength;
+    const newIndex = (this.state.currentPhotoIndex + photosLength - 1) % photosLength;
     this.setState({ currentPhotoIndex: newIndex });
   }
 
@@ -41,23 +38,17 @@ export default class GalleryAndLightbox extends React.Component {
   }
 
   getNextPhoto() {
-    return this.getPhoto(
-      (this.state.currentPhotoIndex + 1) % this.props.photos.length
-    );
+    return this.getPhoto((this.state.currentPhotoIndex + 1) % this.props.photos.length);
   }
 
   getPrevPhoto() {
-    return this.getPhoto(
-      (this.state.currentPhotoIndex - 1) % this.props.photos.length
-    );
+    return this.getPhoto((this.state.currentPhotoIndex - 1) % this.props.photos.length);
   }
 
-  openLightbox(photoId) {
+  openLightbox(e, photo) {
+    const photoId = photo.id;
     this.setState((lastState, lastProps) => {
-      const photoIndex = _.findIndex(
-        lastProps.photos,
-        photo => photo.id === photoId
-      );
+      const photoIndex = _.findIndex(lastProps.photos, photo => photo.id === photoId);
       return {
         currentPhotoIndex: photoIndex,
         isLightboxOpen: true
@@ -69,9 +60,7 @@ export default class GalleryAndLightbox extends React.Component {
     const { isLightboxOpen } = this.state;
     return (
       <div>
-        <Gallery
-          openLightbox={this.openLightbox}
-        />
+        <Gallery clickHandler={this.openLightbox} />
         {isLightboxOpen &&
           <Lightbox
             enableZoom={false}
