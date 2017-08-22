@@ -26,7 +26,13 @@ export default class Contact extends React.Component {
     const displayError = this.props.displayError;
     const displaySuccess = this.props.displaySuccess;
 
-    postJSON("/api/contact", this.state)
+    const message = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      message: e.target.message.value,
+    }
+
+    postJSON("/services/email", message)
       .then(() => {
         displaySuccess("Your email was sent successfully");
         this.setState(initialState);
