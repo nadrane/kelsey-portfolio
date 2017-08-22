@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
   module.exports = require(devConfigPath);
 }
 
-module.exports = Object.assign(module.exports, require(defaultsConfigPath));
+module.exports = Object.assign(require(defaultsConfigPath), module.exports);
 
 module.exports.isProd = function() {
   return module.exports.NODE_ENV === "production";
