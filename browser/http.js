@@ -49,6 +49,4 @@ function definePaginationQuery(url, limit = 15, offset = 0) {
   };
 }
 
-const fetchImages = definePaginationQuery("/api/images/");
-
-export { fetchImages, postJSON, fetchJSON };
+export { definePaginationQuery, postJSON, fetchJSON };

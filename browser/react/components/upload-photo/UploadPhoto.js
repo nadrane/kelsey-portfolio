@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react";
+import { Redirect } from "react-router";
 import { postJSON } from "../../../http";
 import composeClasses from "../../../composeClasses";
 
@@ -61,29 +62,26 @@ export default class UploadPhoto extends React.Component {
   }
 
   render() {
-    const photo = this.state.photo;
+    const { photo } = this.state;
+    const { isAdmin } = this.props;
+    console.log('ggg', this.props, this.state)
     return (
-      <form onSubmit={this.handleSubmit}>
-        <fieldset>
-          <label
-            className={composeClasses(fileInputLabel, btnSecondary)}
-            htmlFor="photo-uploader"
-          >
-            Upload photo
-          </label>
-          <input
-            id="photo-uploader"
-            onChange={this.uploadHandler}
-            name="photo"
-            type="file"
-            accept="image/*"
-          />
-          {photo ? <img className={uploadedPreview} src={photo} /> : null}
-          <button className={btnPrimary} type="submit">
-            Confirm Photo
-          </button>
-        </fieldset>
-      </form>
+      <div>
+        {isAdmin
+          ? <form onSubmit={this.handleSubmit}>
+              <fieldset>
+                <label className={composeClasses(fileInputLabel, btnSecondary)} htmlFor="photo-uploader">
+                  Upload photo
+                </label>
+                <input id="photo-uploader" onChange={this.uploadHandler} name="photo" type="file" accept="image/*" />
+                {photo ? <img className={uploadedPreview} src={photo} /> : null}
+                <button className={btnPrimary} type="submit">
+                  Confirm Photo
+                </button>
+              </fieldset>
+            </form>
+          : <Redirect to="/" />}
+      </div>
     );
   }
 }

@@ -14,10 +14,9 @@ function NavBar({user}) {
       <Link id={brand} to="/">Kelsey Hagen</Link>
       <div id={headerWrapper}>
         <div id={header}>
-          <Link className={link} to="/">Photos</Link>
           <Link className={link} to="/about">About Me</Link>
           <Link className={link} to="/contact">Contact</Link>
-          { user.isAdmin ? <Link className={link} to="/upload">Manage Photos</Link> : null }
+          { user.isAdmin ? <Link className={link} to="/upload">Manage Photos</Link> : <Link className={link} to="/login">Login</Link> }
         </div>
       </div>
     </nav>

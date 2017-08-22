@@ -52,6 +52,7 @@ export default function(InnerComponent) {
         <div>
           <Alert message={message} type={type} onClose={this.onAlertClose} />
           <InnerComponent
+            {...this.props}
             displaySuccess={this.displaySuccess}
             displayError={this.displayError}
           />

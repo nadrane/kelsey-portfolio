@@ -6,9 +6,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./login";
 import UploadPhoto from "./upload-photo";
 import Contact from "./contact";
-import GalleryAndLightbox from './GalleryAndLightbox';
+import Gallery from "./Gallery";
 import Header from "../ui/header";
-import Alert from "../ui/alert";
 
 import { postJSON, fetchJSON } from "../../http";
 import { logError } from "../../loggers";
@@ -18,6 +17,7 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       user: {},
+      loggedIn: false
     };
   }
 
@@ -25,47 +25,63 @@ export default class Main extends React.Component {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    postJSON('/services/auth/login', {email, password})
-    .then(user => {
-      this.setState({user});
-      history.push('/');
-    })
-    .catch(logError);
+    postJSON("/services/auth/login", { email, password })
+      .then(user => {
+        this.setState({
+          user,
+          loggedIn: true
+        });
+        history.push("/");
+      })
+      .catch(logError);
   }
 
   getLoggedInUser() {
-    return fetchJSON('/services/auth/me')
+    return fetchJSON("/services/auth/me")
       .then(user => {
-        this.setState({user});
+        this.setState({
+          user,
+          loggedIn: true
+        });
       })
       .catch(logError);
   }
 
   componentDidMount() {
-    return this.getLoggedInUser()
-      .catch(logError);
+    return this.getLoggedInUser().catch(logError);
   }
 
   render() {
-    const { photos, user } = this.state;
+    const { user, loggedIn } = this.state;
+    const isAdmin = this.state.user.isAdmin;
     return (
       <BrowserRouter>
         <div id="main">
           <Switch>
             <Route path="/contact" component={Contact} />
-            <Route path="/upload" component={UploadPhoto} />
-            <Route path="/login" render={(props) => {
-              const handleLoginClick = this.handleLoginClick.bind(this, props.history);
-              return <Login loginClickHandler={handleLoginClick}/>;
-            }}/>
-            <Route render={() => {
-              return (
-                <div>
-                  <Header user={user}/>
-                  <GalleryAndLightbox />
-                </div>
-              );
-            }}/>
+            <Route
+              path="/upload"
+              render={_ => {
+                return <UploadPhoto isAdmin={isAdmin} />;
+              }}
+            />
+            <Route
+              path="/login"
+              render={props => {
+                const handleLoginClick = this.handleLoginClick.bind(this, props.history);
+                return <Login loginClickHandler={handleLoginClick} loggedIn={loggedIn} />;
+              }}
+            />
+            <Route
+              render={() => {
+                return (
+                  <div>
+                    <Header user={user} />
+                    <Gallery />
+                  </div>
+                );
+              }}
+            />
           </Switch>
         </div>
       </BrowserRouter>

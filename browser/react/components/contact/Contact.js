@@ -2,7 +2,7 @@ import React from "react";
 
 import { postJSON } from "../../../http";
 
-import "button.scss";
+import { btnPrimary } from 'button.scss';
 import "form.scss";
 import "global.scss";
 
@@ -49,7 +49,7 @@ export default class Contact extends React.Component {
           <div>
             <textarea name="message" placeholder="..." />
           </div>
-          <button type="submit">send email</button>
+          <button className={btnPrimary} type="submit">send email</button>
         </fieldset>
       </form>
     );
