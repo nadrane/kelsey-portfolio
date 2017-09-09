@@ -4,6 +4,7 @@ const bluebird = require("bluebird");
 const path = require("path");
 const _ = require('lodash');
 const createPILImage = require('../../image-manipulation/image-manager-pillow');
+const { logError } = require('../../loggers');
 
 const env = require('../../../env');
 
@@ -82,7 +83,7 @@ module.exports = (db, ImageVersion) => {
         return image[setterFunction](imageVersions[versionName]);
       });
     } catch(err) {
-      console.error('error is here', err, err.stack);
+      logError({message: 'Failed to create image versions', type: "image creation", err})
     }
   }
 
@@ -92,7 +93,7 @@ module.exports = (db, ImageVersion) => {
 
   async function prepareAndSaveImage(image, { maxWidth, maxHeight }) {
     let imageVersion;
-    let PILImage = await createPILImage(image.data);
+    let PILImage = createPILImage(image.data);
     await PILImage.resize(maxWidth, maxHeight);
     [imageVersion, PILImage] = await bluebird.join(makeImageVersion(PILImage), PILImage.compress());
     await PILImage.save(path.join(env.PUBLIC_DIR, 'api-images'));

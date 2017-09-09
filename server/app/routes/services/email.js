@@ -1,6 +1,6 @@
 const router = (module.exports = require("express").Router());
 const env = require("../../../../env");
-const { logError } = require("./error/loggers");
+const { logError } = require("../../../loggers");
 
 var mailgun = require("mailgun-js")({
   apiKey: env.MAILGUN_API_KEY,
@@ -19,7 +19,7 @@ router.post("/", function(req, res) {
 
   mailgun.messages().send(data, function(err) {
     if (err) {
-      logError({ type: "email error", message: err });
+      logError({ type: "email error", message: "failed to send email", err });
     }
   });
 });

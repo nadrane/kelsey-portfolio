@@ -1,0 +1,460 @@
+{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 500 2000"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 500 2000"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 500 2000"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 1500 2250"
+    }
+}{
+    "message": "Failed to create image versions",
+    "type": "image creation",
+    "err": {
+        "killed": false,
+        "code": 1,
+        "signal": null,
+        "cmd": "python3 /Users/nicholasdrane/projects/kelsey-portfolio/bin/resize-image.py 500 2000"
+    }
+}

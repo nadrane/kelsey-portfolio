@@ -1,5 +1,9 @@
 import sys
-from PIL import Image
+
+try:
+  from PIL import Image
+except ImportError:
+  sys.exit("You must install PIL")
 
 maxSize = int(sys.argv[1]), int(sys.argv[2])
 

@@ -15,8 +15,10 @@ function resizeImage(buffer, maxWidth, maxHeight) {
         resolve(stdout);
       }
     );
-    child.stdin.write(buffer);
-    child.stdin.end();
+    if (child.connected) {
+      child.stdin.write(buffer);
+      child.stdin.end();
+    }
   });
 }
 
@@ -36,8 +38,10 @@ function calculateDimensions(buffer) {
         });
       }
     );
-    child.stdin.write(buffer);
-    child.stdin.end();
+    if (child.connected) {
+      child.stdin.write(buffer);
+      child.stdin.end();
+    }
   });
 }
 

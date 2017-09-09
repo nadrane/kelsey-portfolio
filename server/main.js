@@ -1,7 +1,7 @@
 "use strict";
 
-const chalk = require("chalk");
 const db = require("./db");
+const { debug, logError } = require('./loggers')
 
 const server = require("http").createServer();
 
@@ -14,11 +14,11 @@ const startServer = function() {
   const PORT = process.env.PORT || 1337;
 
   server.listen(PORT, function() {
-    console.log(chalk.blue("Server started on port", chalk.magenta(PORT)));
+    debug({message: `Server started on port ${PORT}`});
   });
 };
 
 db.then(createApplication).then(startServer).catch(function(err) {
-  console.error(chalk.red(err.stack));
+  logError({type: "server", message:"the server failed to start", err});
   process.exit(1);
 });

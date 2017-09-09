@@ -1,5 +1,9 @@
 import sys
-from PIL import Image
+
+try:
+  from PIL import Image
+except ImportError:
+  sys.exit("You must install PIL")
 
 try:
   image = Image.open(sys.stdin.buffer)
