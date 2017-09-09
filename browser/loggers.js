@@ -1,6 +1,9 @@
 import { postJSON } from "./http";
+import { isDev } from "../env/"
+
 export function logError(err) {
-  console.error(err);
+  if (isDev()) {
+    console.error(err);
+  }
   return postJSON("/services/error", err)
-  .catch(console.error.bind(console));
 }
