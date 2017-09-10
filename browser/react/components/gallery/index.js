@@ -107,8 +107,7 @@ export default class StatefulGalleryAndLightbox extends React.Component {
     return (
       <div>
         <ScrollingGallery
-          columnMinWidth={150}
-          columnMaxWidth={300}
+          columnMinWidth={300}
           gutter={3}
           idealMargin={10}
           clickHandler={this.openLightbox}

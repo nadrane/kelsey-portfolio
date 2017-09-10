@@ -5,7 +5,8 @@ form {
   }
 
   button {
-    margin: 0.2rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
     width: 100%;
 
     &:focus {
@@ -35,8 +36,9 @@ form {
     font-size: 1rem;
     padding: .5rem .75rem;
     border: 1px solid rgba(0,0,0,.20);
-    margin: .2rem;
-    border-radius: 10px;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+    border-radius: 5px;
 
     &::placeholder {
       color: rgba(0, 0, 0, .5);
@@ -55,8 +57,9 @@ form {
     font-size: 1rem;
     padding: .5rem .75rem;
     border: 1px solid rgba(0,0,0,.20);
-    margin: .2rem;
-    border-radius: 10px;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+    border-radius: 3px;
 
     &::placeholder {
       color: rgba(0, 0, 0, .5);

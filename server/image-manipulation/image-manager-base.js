@@ -12,7 +12,7 @@ function createCompressable(buffer) {
   obj.buffer = new Buffer(buffer);
   obj.compress = async function compress() {
     this.buffer = await imagemin.buffer(this.buffer, {
-      use: [imageminMozjpeg({ quality: 100 })]
+      use: [imageminMozjpeg({ quality: 75 })]
     });
     return this;
   };

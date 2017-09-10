@@ -20,9 +20,9 @@ function seedDatabase() {
 }
 
 function seedTable(tableName, cb) {
-  debug(`creating ${tableName}`);
+  debug({ message: `creating ${tableName}`, type: "seeding" });
   return cb()
-    .then(() => debug(`${tableName} created`))
+    .then(() => debug({ message: `${tableName} created`, type: "seeding" }))
     .catch(err => {
       logError({ message: `Error seeding ${tableName}\n`, type: "seeding", err });
     });
@@ -40,13 +40,15 @@ function createImages() {
         return fs
           .readFileAsync(path.join(env.SEED_IMAGES, imagePath))
           .then(imageData => {
+            debug({ message: `begin processing ${imagePath}`, type: "seeding" })
             return Image.create({
               path: imagePath,
               data: imageData.toString("base64")
             });
           })
+          .then(() => debug({ message: `finished processing ${imagePath}`, type: "seeding" }))
           .catch(err => {
-            logError({message: "Image record creation failed", type: "seeding", err});
+            logError({ message: "Image record creation failed", type: "seeding", err });
           });
       });
     });
@@ -77,5 +79,5 @@ function applyTagsToImages(images, users, tags) {
 db
   .sync({ force: true })
   .then(seedDatabase)
-  .then(() => debug("seeding completed"))
+  .then(() => debug({ message: "seeding completed", type: "seeding" }))
   .then(() => process.exit());

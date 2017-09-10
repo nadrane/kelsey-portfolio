@@ -108,7 +108,6 @@ export default class Gallery extends React.Component {
     const columnMinWidth = this.props.columnMinWidth || 100;
     const idealMargin = this.props.idealMargin || 20;
     const { photos, clickHandler } = this.props;
-
     const numberOfColumns = this.getNumberOfColumns(columnMinWidth, gutter, idealMargin);
 
     const columnWidth = this.getColumnWidth(columnMinWidth, gutter, idealMargin);

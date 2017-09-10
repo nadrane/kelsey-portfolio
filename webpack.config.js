@@ -2,7 +2,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
-const devMode = require("./env").isDev;
+const devMode = require("./env").isDev();
 const LiveReloadPlugin = require("webpack-livereload-plugin");
 
 var BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;

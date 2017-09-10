@@ -19,17 +19,17 @@ function getJSON({ logLevel, message, type, err }, ...args) {
 }
 
 function debug({ message, type }, ...args) {
-  const debugJSON = getJSON({ message, type, logLevel: "debug" }, ...args);
   if (isProd()) {
+    const debugJSON = getJSON({ message, type, logLevel: "debug" }, ...args);
     return fs.appendFileAsync(path.resolve(__dirname, "./logs/debug.txt"), debugJSON);
   } else {
-    console.info(chalk.yellow(debugJSON));
+    console.info(chalk.yellow(message));
   }
 }
 
 function logError({ message, type, err }, ...args) {
-  const errorJSON = getJSON({ message, type, err, logLevel: "error" }, ...args);
   if (isProd()) {
+    const errorJSON = getJSON({ message, type, err, logLevel: "error" }, ...args);
     if (err) {
       errorJSON.err = {
         message: err.message,

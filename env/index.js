@@ -1,17 +1,14 @@
 /* eslint-disable global-require */
 
 var path = require("path");
-var devConfigPath = path.join(__dirname, "./development.js");
-var productionConfigPath = path.join(__dirname, "./production.js");
-const defaultsConfigPath = path.join(__dirname, "./defaults.js");
 
 if (process.env.NODE_ENV === "production") {
-  module.exports = require(productionConfigPath);
+  module.exports = require('./production');
 } else {
-  module.exports = require(devConfigPath);
+  module.exports = require('./development');
 }
 
-module.exports = Object.assign(require(defaultsConfigPath), module.exports);
+module.exports = Object.assign(require('./defaults'), module.exports);
 
 module.exports.isProd = function() {
   return module.exports.NODE_ENV === "production";

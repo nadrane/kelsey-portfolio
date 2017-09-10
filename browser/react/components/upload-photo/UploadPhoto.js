@@ -64,7 +64,6 @@ export default class UploadPhoto extends React.Component {
   render() {
     const { photo } = this.state;
     const { isAdmin } = this.props;
-    console.log('ggg', this.props, this.state)
     return (
       <div>
         {isAdmin

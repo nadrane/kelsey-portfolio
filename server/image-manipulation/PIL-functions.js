@@ -15,33 +15,28 @@ function resizeImage(buffer, maxWidth, maxHeight) {
         resolve(stdout);
       }
     );
-    if (child.connected) {
-      child.stdin.write(buffer);
-      child.stdin.end();
-    }
+    child.stdin.write(buffer);
+    child.stdin.end();
   });
 }
 
 function calculateDimensions(buffer) {
   return new bluebird(function(resolve, reject) {
     const executablePath = path.join(env.BIN_DIR, "get-dimensions.py");
-    const child = execFile(
-      "python3",
-      [executablePath],
-      { maxBuffer: 200 * 1024 },
-      function(err, stdout, stderr) {
-        if (err || stderr) reject(err || new Error(stderr));
-        const [width, height] = stdout.toString().split(",");
-        resolve({
-          width,
-          height
-        });
-      }
-    );
-    if (child.connected) {
-      child.stdin.write(buffer);
-      child.stdin.end();
-    }
+    const child = execFile("python3", [executablePath], { maxBuffer: 200 * 1024 }, function(
+      err,
+      stdout,
+      stderr
+    ) {
+      if (err || stderr) reject(err || new Error(stderr));
+      const [width, height] = stdout.toString().split(",");
+      resolve({
+        width,
+        height
+      });
+    });
+    child.stdin.write(buffer);
+    child.stdin.end();
   });
 }
 
